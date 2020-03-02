@@ -1,0 +1,146 @@
+package com.contrat.entities;
+
+import java.io.Serializable;
+import java.lang.String;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.*;
+
+/**
+ * Entity implementation class for Entity: contrat
+ *
+ */
+@Entity
+
+public class Contrat implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int IDCONTRAT;
+	private String NUMEROCONTRAT;
+	private String DESCRIPTION;
+	private LocalDate DATEDEBUT;
+	private LocalDate DATEFIN;
+	private int PERIODICITE;
+	private int DUREE;
+	private double MTTTC;
+	private double MTTVA;
+	private double MTTCOMM;
+	private double MTFINANCEMENT;
+	@OneToOne
+	private Produit produit;
+	@OneToMany
+	private List<Echeance> echeances;
+
+	private static final long serialVersionUID = 1L;
+
+	public Contrat() {
+	}
+	
+	public Produit getProduit() {
+		return produit;
+	}
+
+	public void setProduit(Produit produit) {
+		this.produit = produit;
+	}
+
+	public double getMTFINANCEMENT() {
+		return MTFINANCEMENT;
+	}
+
+	public void setMTFINANCEMENT(double mTFINANCEMENT) {
+		MTFINANCEMENT = mTFINANCEMENT;
+	}
+
+	public List<Echeance> getEcheances() {
+		return echeances;
+	}
+
+	public void setEcheances(List<Echeance> echeances) {
+		this.echeances = echeances;
+	}
+
+	public double getMTTTC() {
+		return MTTTC;
+	}
+
+	public String getDESCRIPTION() {
+		return DESCRIPTION;
+	}
+
+	public void setDESCRIPTION(String dESCRIPTION) {
+		DESCRIPTION = dESCRIPTION;
+	}
+
+	public void setMTTTC(double mTTTC) {
+		MTTTC = mTTTC;
+	}
+
+	public double getMTTVA() {
+		return MTTVA;
+	}
+
+	public void setMTTVA(double mTTVA) {
+		MTTVA = mTTVA;
+	}
+
+	public double getMTTCOM() {
+		return MTTCOMM;
+	}
+
+	public void setMTTCOM(double mTTCOM) {
+		MTTCOMM = mTTCOM;
+	}
+
+	public int getIDCONTRAT() {
+		return this.IDCONTRAT;
+	}
+
+	public void setIDCONTRAT(int IDCONTRAT) {
+		this.IDCONTRAT = IDCONTRAT;
+	}
+
+	public String getNUMEROCONTRAT() {
+		return this.NUMEROCONTRAT;
+	}
+
+	public void setNUMEROCONTRAT(String NUMEROCONTRAT) {
+		this.NUMEROCONTRAT = NUMEROCONTRAT;
+	}
+
+	public LocalDate getDATEDEBUT() {
+		return this.DATEDEBUT;
+	}
+
+	public void setDATEDEBUT(LocalDate DATEDEBUT) {
+		this.DATEDEBUT = DATEDEBUT;
+	}
+
+	public LocalDate getDATEFIN() {
+		return this.DATEFIN;
+	}
+
+	public void setDATEFIN(LocalDate DATEFIN) {
+		this.DATEFIN = DATEFIN;
+	}
+
+	public int getPERIODICITE() {
+		return this.PERIODICITE;
+	}
+
+	public void setPERIODICITE(int PERIODICITE) {
+		this.PERIODICITE = PERIODICITE;
+	}
+
+	public int getDUREE() {
+		return this.DUREE;
+	}
+
+	public void setDUREE(int DUREE) {
+		this.DUREE = DUREE;
+	}
+
+}
