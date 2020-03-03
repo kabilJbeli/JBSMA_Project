@@ -9,6 +9,7 @@
 		<class>com.contrat.entities.Contrat</class>
 		<class>com.contrat.entities.Produit</class>
 		<class>com.contrat.entities.Echeance</class>
+		<class>com.contrat.entities.Tier</class>
 		<properties>
 			<property name="hibernate.connection.driver_class"
 				value="com.mysql.jdbc.Driver" />
