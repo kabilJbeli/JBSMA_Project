@@ -1,24 +1,30 @@
-<!DOCTYPE html>
-<html xmlns:f="http://xmlns.jcp.org/jsf/core" 
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-        <head>
-            <title>Login screen</title>
-            <link rel="stylesheet" type="text/css" href="styles.css" />
-        </head>
-        <body>
-            <h1>Login screen</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+ <h:head>
+   <title><ui:insert name="title">insert title</ui:insert></title>
+   <meta content="text/html; charset=UTF-8" http-equiv="Content-type" />
+   </h:head>
+<h:body>
+         <p:spinner />
+
+	       <h1>Login screen</h1>
+	          <p:spinner />
             <h:form>
             
                 Login: 
-                <h:inputText id="firstName" value="#{CreationContrat.firstName}" />
+                <h:inputText id="firstName" />
                 <br/>
                 
                 Password:
-                <h:inputText id="lastName" value="#{CreationContrat.lastName}" />
+                <h:inputText id="lastName" />
                 <br/>
             
                 
                 
            </h:form>
-        </body>
+           </h:body>	
 </html>

@@ -4,7 +4,7 @@ import com.contrat.entities.Tier;
 
 public interface TierManagementLocal {
 	public void delete(Tier T);
-	public int update(Tier T);
-	public Tier findByName(String name);
+	public Tier update(Tier T);
 	public void creation (Tier T);
+	public Tier findByCIN(Integer CIN);
 }

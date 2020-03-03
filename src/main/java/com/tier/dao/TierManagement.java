@@ -42,18 +42,16 @@ public class TierManagement implements TierManagementLocal{
 	}
 
 	@Override
-	public int update(Tier T) {
-		// TODO Auto-generated method stub
-		
+	public Tier update(Tier T) {
+		// TODO Auto-generated method stub		
 		   EntityTransaction et = null;
 	        Tier cust = null;
-	        int updated=0;
-	 
+	        Tier merged = null;
 	        try {
 	            et = em.getTransaction();
 	            et.begin();
-	            cust = em.find(Tier.class, T.getIDTIER());
-	            em.merge(cust);	
+	            cust = em.find(Tier.class, T.getCINTIER());
+	            merged =  em.merge(cust);	
 	            et.commit();
 	    		
 	        } catch (Exception ex) {
@@ -64,19 +62,18 @@ public class TierManagement implements TierManagementLocal{
 	        } finally {
 	            em.close();
 	        }
-		return 0;
+		return merged;
 	}
 
 	@Override
-	public Tier findByName(String name) {
-		
+	public Tier findByCIN(Integer CIN) {		
 		   EntityTransaction et = null;
 	        Tier cust = null;
 	 
 	        try {
 	            et = em.getTransaction();
 	            et.begin();
-	            cust = em.find(Tier.class, name);
+	            cust = em.find(Tier.class, CIN);
 	            et.commit();
 	    		
 	        } catch (Exception ex) {
