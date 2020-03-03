@@ -31,6 +31,18 @@ public class Contrat implements Serializable {
 	private double MTFINANCEMENT;
 	@OneToOne
 	private Produit produit;
+	
+	@OneToOne
+	private Tier tier;
+	
+	public Tier getTier() {
+		return tier;
+	}
+
+	public void setTier(Tier tier) {
+		this.tier = tier;
+	}
+
 	@OneToMany
 	private List<Echeance> echeances;
 
