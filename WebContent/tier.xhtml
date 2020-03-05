@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	 <h:head>
+   <title><ui:insert name="title">insert title</ui:insert></title>
+   <meta content="text/html; charset=UTF-8" http-equiv="Content-type" />
+   </h:head>
+<h:body>
+<h:form>
+ <h:inputText  value="#{Tier.NAMETIER}" required="true" />
+  <h:inputText  value="#{Tier.PRENOMTIER}" required="true" />
+   <h:inputText  value="#{Tier.ADRESSETIER}" required="true" />
+    <h:inputText  value="#{Tier.CINTIER}" required="true" converterMessage="Please enter digits only." />
+    <h:commandButton value="submit" type="submit" action="#{TierManagement.creation(Tier)}" />
+    <h:messages />
+</h:form>
+
+
+    
+</h:body>
+</html>

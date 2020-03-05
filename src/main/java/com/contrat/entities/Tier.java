@@ -3,12 +3,17 @@ package com.contrat.entities;
 import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Tier
  *
  */
+@ManagedBean(name = "Tier")
+@SessionScoped
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Tier implements Serializable {
