@@ -9,7 +9,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@Table(name="produit")
 public class Produit implements Serializable {
 
 	   

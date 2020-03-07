@@ -7,6 +7,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
+
+import org.hibernate.Interceptor;
+import org.hibernate.SessionFactory;
 
 import com.contrat.entities.Contrat;
 
@@ -16,37 +20,29 @@ import com.contrat.entities.Contrat;
 @Stateless
 @LocalBean
 public class ContratManagement implements ContratManagementLocal {
-	@PersistenceContext
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("JBSMA");
-	EntityManager em = emf.createEntityManager() ;
+	static EntityManagerFactory emf = Persistence.createEntityManagerFactory("JBSMA");
 
-    /**
-     * Default constructor. 
-     */
-    public ContratManagement() {
-        // TODO Auto-generated constructor stub
-    }
+	public static EntityManager getEntityManager() {
+		return emf.createEntityManager();
+	}
 
+	/**
+	 * Default constructor.
+	 */
+	public ContratManagement() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
-	public void delete (Contrat c) {
-        EntityTransaction et = null;
-        Contrat cust = null;
- 
-        try {
-            et = em.getTransaction();
-            et.begin();
-            cust = em.find(Contrat.class, ((Contrat)c).getNUMEROCONTRAT());
-            em.remove(cust);
-            et.commit();
-        } catch (Exception ex) {
-            if (et != null) {
-                et.rollback();
-            }
-            ex.printStackTrace();
-        } finally {
-            em.close();
-        }
+	public void delete(Contrat c) {
+
+		EntityManager em = getEntityManager();
+		em.getTransaction().begin();
+		Contrat cust = null;
+		cust = em.find(Contrat.class, ((Contrat) c).getNUMEROCONTRAT());
+		em.remove(cust);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	@Override
@@ -62,21 +58,12 @@ public class ContratManagement implements ContratManagementLocal {
 
 	@Override
 	public void creation(Contrat c) {
-        EntityTransaction et = null;
-        try {
-            et = em.getTransaction();
-            et.begin();
-            em.persist(((Contrat)c));
-            et.commit();
-        } catch (Exception ex) {
-            if (et != null) {
-                et.rollback();
-            }
-            ex.printStackTrace();
-        } finally {
-            em.close();
-        }
-		
+		EntityManager em = getEntityManager();
+		em.getTransaction().begin();
+		em.persist(((Contrat) c));
+		em.getTransaction().commit();
+		em.close();
+
 	}
 
 }

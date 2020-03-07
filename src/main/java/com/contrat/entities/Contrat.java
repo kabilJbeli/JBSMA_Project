@@ -23,7 +23,7 @@ public class Contrat implements Serializable {
 	private String DESCRIPTION;
 	private LocalDate DATEDEBUT;
 	private LocalDate DATEFIN;
-	private int PERIODICITE;
+	private LocalDate DATEECHEANCE;
 	private int DUREE;
 	private double MTTTC;
 	private double MTTVA;
@@ -130,6 +130,14 @@ public class Contrat implements Serializable {
 	public void setDATEDEBUT(LocalDate DATEDEBUT) {
 		this.DATEDEBUT = DATEDEBUT;
 	}
+	
+	public LocalDate getDATEECHEANCE() {
+		return DATEECHEANCE;
+	}
+
+	public void setDATEECHEANCE(LocalDate dATEECHEANCE) {
+		DATEECHEANCE = dATEECHEANCE;
+	}
 
 	public LocalDate getDATEFIN() {
 		return this.DATEFIN;
@@ -137,14 +145,6 @@ public class Contrat implements Serializable {
 
 	public void setDATEFIN(LocalDate DATEFIN) {
 		this.DATEFIN = DATEFIN;
-	}
-
-	public int getPERIODICITE() {
-		return this.PERIODICITE;
-	}
-
-	public void setPERIODICITE(int PERIODICITE) {
-		this.PERIODICITE = PERIODICITE;
 	}
 
 	public int getDUREE() {

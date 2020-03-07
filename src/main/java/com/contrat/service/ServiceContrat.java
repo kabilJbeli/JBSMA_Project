@@ -8,10 +8,10 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.contrat.dao.ContratManagementLocal;
-import com.contrat.dao.DAOConfProduit;
 import com.contrat.entities.Contrat;
 import com.contrat.entities.Echeance;
 import com.contrat.entities.Produit;
+import com.contrat.entities.Tier;
 
 /**
  * Session Bean implementation class ServiceContrat
@@ -21,7 +21,6 @@ import com.contrat.entities.Produit;
 public class ServiceContrat implements ServiceContratLocal {
 	@EJB
 	ContratManagementLocal daoContrat;
-	DAOConfProduit daoConfProduit;
 
 
     public ServiceContrat() {
@@ -47,21 +46,14 @@ public class ServiceContrat implements ServiceContratLocal {
     }
     
     @Override
-    public void CreationContrat (Contrat contrat/*,String codeProduit,String cinTiers*/) {
-    	//Produit config = daoConfProduit.rechercheProduit(codeProduit);
-    	//TODO get tiers information
+    public void CreationContrat (Contrat contrat,Produit produit,Tier tier) {
+    	
+    	contrat.setTier(tier);
+    	contrat.setProduit(produit);
     	contrat.setEcheances(CalculeMensualite(contrat));
     	daoContrat.creation(contrat);
 
 
-    }
-    
-    public static void main (String[]args) {
-    	Contrat contrat = new Contrat();
-    	contrat.setMTFINANCEMENT(300000);
-    	contrat.setDUREE(10);
-    	ServiceContrat serviceContrat = new ServiceContrat();
-    	serviceContrat.CreationContrat(contrat);
     }
 
 }
