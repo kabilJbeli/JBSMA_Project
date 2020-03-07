@@ -1,4 +1,4 @@
-package com.contrat.entities;
+package com.tier.entities;
 
 import java.io.Serializable;
 import java.lang.Integer;

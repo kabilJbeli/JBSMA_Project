@@ -11,7 +11,7 @@ import com.contrat.dao.ContratManagementLocal;
 import com.contrat.entities.Contrat;
 import com.contrat.entities.Echeance;
 import com.contrat.entities.Produit;
-import com.contrat.entities.Tier;
+import com.tier.entities.Tier;
 
 /**
  * Session Bean implementation class ServiceContrat

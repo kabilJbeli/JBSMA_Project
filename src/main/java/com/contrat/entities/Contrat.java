@@ -8,6 +8,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.tier.entities.Tier;
+
 /**
  * Entity implementation class for Entity: contrat
  *

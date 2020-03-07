@@ -1,10 +1,12 @@
 package com.tier.dao;
 
-import com.contrat.entities.Tier;
+import javax.ejb.Local;
 
+import com.tier.entities.Tier;
+@Local
 public interface TierManagementLocal {
 	public void delete(Tier T);
-	public int update(Tier T);
+	public void update(Tier T);
 	public Tier findByName(String name);
 	public void creation (Tier T);
 }

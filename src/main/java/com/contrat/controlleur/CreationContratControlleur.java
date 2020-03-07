@@ -8,16 +8,13 @@ import javax.ejb.Stateless;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
 
 import com.contrat.dao.ConfProduitLocal;
 import com.contrat.dao.ContratManagementLocal;
 import com.contrat.entities.Contrat;
 import com.contrat.entities.Produit;
-import com.contrat.entities.Tier;
+import com.tier.entities.Tier;
+import com.tier.dao.TierManagement;
 
 
  
@@ -29,7 +26,9 @@ public class CreationContratControlleur {
 	ConfProduitLocal daoproduit;
 	@EJB
 	ContratManagementLocal daocontrat;
-    private List<Produit> produits;
+	@EJB
+	TierManagement daotier;
+	private List<Produit> produits;
     private Produit produit;
     private double Mtfinancement;
     private LocalDate DateEffet;
@@ -42,6 +41,12 @@ public class CreationContratControlleur {
 	}
 	public void setDaoproduit(ConfProduitLocal daoproduit) {
 		this.daoproduit = daoproduit;
+	}
+    public TierManagement getDaotier() {
+		return daotier;
+	}
+	public void setDaotier(TierManagement daotier) {
+		this.daotier = daotier;
 	}
 	public ContratManagementLocal getDaocontrat() {
 		return daocontrat;
@@ -56,7 +61,7 @@ public class CreationContratControlleur {
 		this.produit = produit;
 	}
 	public Tier getTiers() {
-		return tiers;
+		return daotier.findByName("iskander");
 	}
 	public void setTiers(Tier tiers) {
 		this.tiers = tiers;

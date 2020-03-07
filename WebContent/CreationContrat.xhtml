@@ -39,7 +39,7 @@
 						<h:outputLabel value="produit"
 							styleClass="control-label col-sm-2" />
 						<div class="col-sm-10">
-							<h:selectOneMenu value="#{CreationContrat.produit}" converter="Converter" >
+							<h:selectOneMenu value="#{CreationContrat.produit}" >
 								<f:selectItems value="#{CreationContrat.produits}" var="produit" itemValue="#{produit}" itemLabel="#{produit.DESCRIPTION}" />
 								<h:message for="produit" />
 							</h:selectOneMenu>

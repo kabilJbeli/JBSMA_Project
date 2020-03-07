@@ -38,42 +38,28 @@ public class ConfProduit implements ConfProduitLocal {
 	public ConfProduit() {
 	}
 
-	// @Override
-	// public Produit rechercheProduit(String nomProduit) throws SecurityException,
-	// IllegalStateException, RollbackException, HeuristicMixedException,
-	// HeuristicRollbackException {
-	// Produit cust = null;
-	//
-	// try {
-	// utx.begin();
-	// cust = entityManager.find(Produit.class, nomProduit);
-	// utx.commit();
-	// entityManager.close();
-	// } catch (NotSupportedException | SystemException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// return cust;
-	//
-	// }
+	@Override
+	public Produit rechercheProduit(String nomProduit) {
+		Produit cust = null;
+		if (entityManager.getTransaction().isActive() == false) {
+			entityManager.getTransaction().begin();
+		}
+		cust = entityManager.find(Produit.class, nomProduit);
+		entityManager.getTransaction().commit();
+		return cust;
+
+	}
 
 	@Override
 	public List<Produit> rechercheProduits() {
 		List<Produit> cust = null;
-		if( entityManager.getTransaction().isActive() == false) {
-		entityManager.getTransaction().begin();
+		if (entityManager.getTransaction().isActive() == false) {
+			entityManager.getTransaction().begin();
 		}
 		Query query = entityManager.createNativeQuery("select * from produit", Produit.class);
 		cust = query.getResultList();
 		entityManager.getTransaction().commit();
 		return cust;
-	}
-
-	@Override
-	public Produit rechercheProduit(String nomProduit) throws SecurityException, IllegalStateException,
-			RollbackException, HeuristicMixedException, HeuristicRollbackException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
