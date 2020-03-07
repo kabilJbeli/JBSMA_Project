@@ -17,7 +17,6 @@ public class Produit implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int IDCONF;
 	private String DESCRIPTION;
-	private double TAUXTVA;
 	private double TAUXCOMM;
 	private static final long serialVersionUID = 1L;
 
@@ -38,13 +37,7 @@ public class Produit implements Serializable {
 	public void setDESCRIPTION(String DESCRIPTION) {
 		this.DESCRIPTION = DESCRIPTION;
 	}   
-	public double getTAUXTVA() {
-		return this.TAUXTVA;
-	}
-
-	public void setTAUXTVA(double TAUXTVA) {
-		this.TAUXTVA = TAUXTVA;
-	}   
+	
 	public double getTAUXCOMM() {
 		return this.TAUXCOMM;
 	}

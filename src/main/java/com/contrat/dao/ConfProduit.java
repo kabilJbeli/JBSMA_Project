@@ -23,6 +23,7 @@ import javax.transaction.UserTransaction;
 import org.hibernate.Session;
 
 import com.contrat.entities.Produit;
+import com.tier.entities.Tier;
 
 /**
  * Session Bean implementation class ConfProduit
@@ -40,26 +41,13 @@ public class ConfProduit implements ConfProduitLocal {
 
 	@Override
 	public Produit rechercheProduit(String nomProduit) {
-		Produit cust = null;
-		if (entityManager.getTransaction().isActive() == false) {
-			entityManager.getTransaction().begin();
-		}
-		cust = entityManager.find(Produit.class, nomProduit);
-		entityManager.getTransaction().commit();
-		return cust;
-
+		return entityManager.find(Produit.class, nomProduit);
 	}
 
 	@Override
 	public List<Produit> rechercheProduits() {
-		List<Produit> cust = null;
-		if (entityManager.getTransaction().isActive() == false) {
-			entityManager.getTransaction().begin();
-		}
 		Query query = entityManager.createNativeQuery("select * from produit", Produit.class);
-		cust = query.getResultList();
-		entityManager.getTransaction().commit();
-		return cust;
-	}
+		return query.getResultList();
+}
 
 }

@@ -13,6 +13,7 @@ import com.contrat.dao.ConfProduitLocal;
 import com.contrat.dao.ContratManagementLocal;
 import com.contrat.entities.Contrat;
 import com.contrat.entities.Produit;
+import com.contrat.service.ServiceContratLocal;
 import com.tier.entities.Tier;
 import com.tier.dao.TierManagement;
 
@@ -25,7 +26,7 @@ public class CreationContratControlleur {
 	@EJB
 	ConfProduitLocal daoproduit;
 	@EJB
-	ContratManagementLocal daocontrat;
+	ServiceContratLocal daocontrat;
 	@EJB
 	TierManagement daotier;
 	private List<Produit> produits;
@@ -48,10 +49,10 @@ public class CreationContratControlleur {
 	public void setDaotier(TierManagement daotier) {
 		this.daotier = daotier;
 	}
-	public ContratManagementLocal getDaocontrat() {
+	public ServiceContratLocal getDaocontrat() {
 		return daocontrat;
 	}
-	public void setDaocontrat(ContratManagementLocal daocontrat) {
+	public void setDaocontrat(ServiceContratLocal daocontrat) {
 		this.daocontrat = daocontrat;
 	}
 	public Produit getProduit() {
@@ -61,7 +62,7 @@ public class CreationContratControlleur {
 		this.produit = produit;
 	}
 	public Tier getTiers() {
-		return daotier.findByName("iskander");
+		return tiers;
 	}
 	public void setTiers(Tier tiers) {
 		this.tiers = tiers;
@@ -99,7 +100,7 @@ public class CreationContratControlleur {
 		contrat.setDATEDEBUT(DateEffet);
 		contrat.setDATEFIN(DateFin);
 		contrat.setMTFINANCEMENT(Mtfinancement);
-		daocontrat.creation(contrat);
+		daocontrat.CreationContrat(contrat);
 	}
    
 }

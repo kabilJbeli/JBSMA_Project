@@ -1,17 +1,17 @@
 package com.tier.dao;
 
+import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
+
 import com.tier.entities.Tier;
 
-@Stateless
 @LocalBean
+@Stateless
 @TransactionManagement(javax.ejb.TransactionManagementType.BEAN)
 public class TierManagement implements TierManagementLocal {
 
@@ -27,42 +27,22 @@ public class TierManagement implements TierManagementLocal {
 
 	@Override
 	public void delete(Tier T) {
-		Tier cust = null;
-		if (entityManager.getTransaction().isActive() == false) {
-			entityManager.getTransaction().begin();
-		}
-		cust = entityManager.find(Tier.class, ((Tier) T).getCINTIER());
-		entityManager.remove(cust);
-		entityManager.getTransaction().commit();
+		entityManager.remove(T);
+
 	}
 
 	@Override
 	public void update(Tier T) {
-		Tier cust = null;
-		if (entityManager.getTransaction().isActive() == false) {
-			entityManager.getTransaction().begin();
-		}
-			cust = entityManager.find(Tier.class, T.getIDTIER());
-			entityManager.merge(cust);
-			entityManager.getTransaction().commit();
+		entityManager.merge(T);
 	}
 
 	@Override
 	public Tier findByName(String name) {
-		Tier cust = null;
-		if (entityManager.getTransaction().isActive() == false) {
-			entityManager.getTransaction().begin();
-		}
-		cust = entityManager.find(Tier.class, name);
-		return cust;
+		return entityManager.find(Tier.class, 1);
 	}
 
 	@Override
 	public void creation(Tier T) {
-		if (entityManager.getTransaction().isActive() == false) {
-			entityManager.getTransaction().begin();
-		}
 		entityManager.persist(T);
-
 	}
 }

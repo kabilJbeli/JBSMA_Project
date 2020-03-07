@@ -1,30 +1,35 @@
 package com.contrat.dao;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 
 import org.hibernate.Interceptor;
 import org.hibernate.SessionFactory;
 
 import com.contrat.entities.Contrat;
+import com.contrat.entities.Produit;
 
 /**
  * Session Bean implementation class ContratManagement
  */
 @Stateless
 @LocalBean
+@TransactionManagement(javax.ejb.TransactionManagementType.BEAN)
 public class ContratManagement implements ContratManagementLocal {
-	static EntityManagerFactory emf = Persistence.createEntityManagerFactory("JBSMA");
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("JBSMA");
+	EntityManager entityManager = emf.createEntityManager();
 
-	public static EntityManager getEntityManager() {
-		return emf.createEntityManager();
-	}
+
 
 	/**
 	 * Default constructor.
@@ -34,36 +39,24 @@ public class ContratManagement implements ContratManagementLocal {
 	}
 
 	@Override
-	public void delete(Contrat c) {
-
-		EntityManager em = getEntityManager();
-		em.getTransaction().begin();
-		Contrat cust = null;
-		cust = em.find(Contrat.class, ((Contrat) c).getNUMEROCONTRAT());
-		em.remove(cust);
-		em.getTransaction().commit();
-		em.close();
+	public void delete(Contrat contrat) {
+		entityManager.remove(contrat);
 	}
 
 	@Override
-	public int update(Contrat c) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void update(Contrat contrat) {
+		entityManager.merge(contrat);
 	}
 
 	@Override
 	public Contrat findByName(String name) {
-		return null;
+		Query query = entityManager.createNativeQuery("select * from contrat where NUMEROCONTRAT = ?", Contrat.class).setParameter("NUMEROCONTRAT", name);
+		return (Contrat) query.getSingleResult();
 	}
 
 	@Override
-	public void creation(Contrat c) {
-		EntityManager em = getEntityManager();
-		em.getTransaction().begin();
-		em.persist(((Contrat) c));
-		em.getTransaction().commit();
-		em.close();
-
-	}
+	public void creation(Contrat contrat) {
+		entityManager.persist(contrat);
+		}
 
 }
