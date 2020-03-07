@@ -40,8 +40,8 @@ public class ServiceContrat implements ServiceContratLocal {
     		Echeance echeance = new Echeance();
     		double mensualite = (montantfinancement * (tauxinteret/12))/ (1-( Math.pow(1+(tauxinteret/12), - duree)));
     		echeance.setMTTTC(mensualite);
+    		echeance.setIDCONTRAT(contrat);
     		echances.add(echeance);
-    		daoEcheance.creation(echeance);
     	}
     	
 		return echances;
@@ -53,6 +53,9 @@ public class ServiceContrat implements ServiceContratLocal {
     	contrat.setEcheances(CalculeMensualite(contrat));
     	contrat.setDATEDEBUT(contrat.getDATEDEBUT().plusMonths(1));
     	daoContrat.creation(contrat);
+//    	for (Echeance echeance:contrat.getEcheances()) {
+//    		daoEcheance.creation(echeance);
+//    	}
 
 
     }

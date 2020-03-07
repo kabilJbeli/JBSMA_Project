@@ -31,7 +31,7 @@ public class Contrat implements Serializable {
 	private double MTTVA;
 	private double MTTCOMM;
 	private double MTFINANCEMENT;
-	@OneToOne
+	@OneToOne(cascade = { CascadeType.MERGE })
 	private Produit produit;
 	
 	@OneToOne
@@ -45,7 +45,7 @@ public class Contrat implements Serializable {
 		this.tier = tier;
 	}
 
-	@OneToMany
+	@OneToMany(cascade = { CascadeType.PERSIST },mappedBy="contrat")
 	private List<Echeance> echeances;
 
 	private static final long serialVersionUID = 1L;

@@ -17,18 +17,11 @@ public class Echeance implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int IDECHEANCE;
 	private double MTTTC;
-	private double MTTVA;
 	private double MTTCOMM;
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Contrat IDCONTRAT;
+	@ManyToOne
+	private Contrat contrat;
 	
 	private static final long serialVersionUID = 1L;
-	public double getMTTVA() {
-		return MTTVA;
-	}
-	public void setMTTVA(double mTTVA) {
-		MTTVA = mTTVA;
-	}
 	public double getMTTCOMM() {
 		return MTTCOMM;
 	}
@@ -55,11 +48,11 @@ public class Echeance implements Serializable {
 		this.MTTTC = MTTTC;
 	}   
 	public Contrat getIDCONTRAT() {
-		return this.IDCONTRAT;
+		return this.contrat;
 	}
 
 	public void setIDCONTRAT(Contrat IDCONTRAT) {
-		this.IDCONTRAT = IDCONTRAT;
+		this.contrat = IDCONTRAT;
 	}
    
 }
