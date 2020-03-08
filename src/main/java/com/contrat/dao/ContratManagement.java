@@ -1,23 +1,17 @@
 package com.contrat.dao;
 
-import java.util.List;
-
+import javax.annotation.Resource;
 import javax.ejb.LocalBean;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
-
-import org.hibernate.Interceptor;
-import org.hibernate.SessionFactory;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 import com.contrat.entities.Contrat;
-import com.contrat.entities.Produit;
 
 /**
  * Session Bean implementation class ContratManagement
@@ -26,10 +20,10 @@ import com.contrat.entities.Produit;
 @LocalBean
 @TransactionManagement(javax.ejb.TransactionManagementType.BEAN)
 public class ContratManagement implements ContratManagementLocal {
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("JBSMA");
-	EntityManager entityManager = emf.createEntityManager();
-
-
+	@PersistenceContext(unitName = "JBSMA")
+	EntityManager entityManager;
+	@Resource
+	private SessionContext sessionContext;
 
 	/**
 	 * Default constructor.
@@ -40,23 +34,84 @@ public class ContratManagement implements ContratManagementLocal {
 
 	@Override
 	public void delete(Contrat contrat) {
-		entityManager.remove(contrat);
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();
+			getEntityManager().remove(contrat);
+			userTxn.commit();
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	public void update(Contrat contrat) {
-		entityManager.merge(contrat);
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();
+			getEntityManager().merge(contrat);
+			userTxn.commit();
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	public Contrat findByName(String name) {
-		Query query = entityManager.createNativeQuery("select * from contrat where NUMEROCONTRAT = ?", Contrat.class).setParameter("NUMEROCONTRAT", name);
-		return (Contrat) query.getSingleResult();
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();
+			Query query = getEntityManager()
+					.createNativeQuery("select * from contrat where NUMEROCONTRAT = ?", Contrat.class)
+					.setParameter("NUMEROCONTRAT", name);
+			userTxn.commit();
+			return (Contrat) query.getSingleResult();
+
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public void creation(Contrat contrat) {
-		entityManager.persist(contrat);
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();
+			getEntityManager().persist(contrat);
+			userTxn.commit();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
 		}
+	}
 
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
 }

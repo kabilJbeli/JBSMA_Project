@@ -11,7 +11,7 @@ import com.contrat.entities.Produit;
 
 @Local
 public interface ConfProduitLocal {
-	public Produit rechercheProduit(String nomProduit) throws SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException;
+	public Produit rechercheProduit(int IdProduit);
 	public List<Produit> rechercheProduits();
 
 }

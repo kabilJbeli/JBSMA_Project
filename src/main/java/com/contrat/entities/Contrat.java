@@ -28,7 +28,6 @@ public class Contrat implements Serializable {
 	private LocalDate DATEECHEANCE;
 	private int DUREE;
 	private double MTTTC;
-	private double MTTVA;
 	private double MTTCOMM;
 	private double MTFINANCEMENT;
 	@OneToOne(cascade = { CascadeType.MERGE })
@@ -91,14 +90,6 @@ public class Contrat implements Serializable {
 
 	public void setMTTTC(double mTTTC) {
 		MTTTC = mTTTC;
-	}
-
-	public double getMTTVA() {
-		return MTTVA;
-	}
-
-	public void setMTTVA(double mTTVA) {
-		MTTVA = mTTVA;
 	}
 
 	public double getMTTCOM() {

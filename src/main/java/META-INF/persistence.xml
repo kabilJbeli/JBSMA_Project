@@ -10,6 +10,8 @@
 		<class>com.contrat.entities.Produit</class>
 		<class>com.contrat.entities.Echeance</class>
 		<class>com.tier.entities.Tier</class>
+		<class>com.comptabilite.entities.Facture</class>
+		<class>com.comptabilite.entities.Encaissement</class>
 		<properties>
 			<property name="hibernate.connection.driver_class"
 				value="com.mysql.jdbc.Driver" />

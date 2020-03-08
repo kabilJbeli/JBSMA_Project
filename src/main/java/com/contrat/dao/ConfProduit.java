@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.persistence.EntityManager;
@@ -32,16 +33,40 @@ import com.tier.entities.Tier;
 @LocalBean
 @TransactionManagement(javax.ejb.TransactionManagementType.BEAN)
 public class ConfProduit implements ConfProduitLocal {
-
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("JBSMA");
-	EntityManager entityManager = emf.createEntityManager();
+	@PersistenceContext(unitName = "JBSMA")
+	EntityManager entityManager;
+	@Resource
+	private SessionContext sessionContext;
 
 	public ConfProduit() {
 	}
+	
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
 
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+	
 	@Override
-	public Produit rechercheProduit(String nomProduit) {
-		return entityManager.find(Produit.class, nomProduit);
+	public Produit rechercheProduit(int idproduit) {
+		Produit produit = new Produit();
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();
+			produit = getEntityManager().find(Produit.class, idproduit);
+			userTxn.commit();
+			return produit;
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	@Override
