@@ -1,5 +1,7 @@
 package com.tier.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.SessionContext;
@@ -11,11 +13,12 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
-
+import javax.persistence.Query;
+import com.contrat.entities.Produit;
 import com.tier.entities.Tier;
 
-@LocalBean
 @Stateless
+@LocalBean
 @TransactionManagement(javax.ejb.TransactionManagementType.BEAN)
 public class TierManagement implements TierManagementLocal {
 	@PersistenceContext(unitName = "JBSMA")
@@ -73,14 +76,16 @@ public class TierManagement implements TierManagementLocal {
 	}
 
 	@Override
-	public Tier findByName(String name) {
-		Tier tier = new Tier();
+	public List<Tier> findByName(String name) {
+		List<Tier> tier = null;
 		UserTransaction userTxn = sessionContext.getUserTransaction();
 		try {
 			userTxn.begin();
-			tier = getEntityManager().find(Tier.class, 1);
+			
+			Query query =getEntityManager().createNativeQuery("select * from Tier where NAMETIER="+name);
+			tier = query.getResultList();
 			userTxn.commit();
-			return tier;
+			
 		} catch (Throwable e) {
 			e.printStackTrace();
 			try {
@@ -89,7 +94,7 @@ public class TierManagement implements TierManagementLocal {
 				e1.printStackTrace();
 			}
 		}
-		return null;
+		return tier;
 	}
 
 	@Override
@@ -107,5 +112,12 @@ public class TierManagement implements TierManagementLocal {
 				e1.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public List<Tier> getAll() {
+		// TODO Auto-generated method stub	
+		Query query = entityManager.createNativeQuery("select * from Tier", Tier.class);
+		return query.getResultList();
 	}
 }

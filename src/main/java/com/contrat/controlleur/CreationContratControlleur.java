@@ -1,5 +1,6 @@
 package com.contrat.controlleur;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import com.contrat.entities.Produit;
 import com.contrat.service.ServiceContratLocal;
 import com.tier.entities.Tier;
 import com.tier.dao.TierManagement;
+import com.tier.dao.TierManagementLocal;
 
 
  
@@ -28,8 +30,9 @@ public class CreationContratControlleur {
 	@EJB
 	ServiceContratLocal daocontrat;
 	@EJB
-	TierManagement daotier;
-	private List<Produit> produits;
+	TierManagementLocal daotier;
+	private String tierName;
+	public List<Tier> serachedTiers;
     private Produit produit;
     private double Mtfinancement;
     private LocalDate DateEffet;
@@ -43,7 +46,7 @@ public class CreationContratControlleur {
 	public void setDaoproduit(ConfProduitLocal daoproduit) {
 		this.daoproduit = daoproduit;
 	}
-    public TierManagement getDaotier() {
+    public TierManagementLocal getDaotier() {
 		return daotier;
 	}
 	public void setDaotier(TierManagement daotier) {
@@ -70,6 +73,19 @@ public class CreationContratControlleur {
 	public List<Produit> getProduits() {
 		return daoproduit.rechercheProduits();
 	}
+	
+	public void getListTiersByName() {
+		this.serachedTiers = daotier.findByName(tiers.getNAMETIER());
+	}
+	
+	public List<Tier> getSearchedTier(){
+		return serachedTiers;
+	}
+	
+	public List<Tier> getListTiers() {
+		return daotier.getAll();
+	}
+	
 	public double getMtfinancement() {
 		return Mtfinancement;
 	}
@@ -100,7 +116,12 @@ public class CreationContratControlleur {
 		contrat.setDATEDEBUT(DateEffet);
 		contrat.setDATEFIN(DateFin);
 		contrat.setMTFINANCEMENT(Mtfinancement);
-		daocontrat.CreationContrat(contrat);
+		try {
+			daocontrat.CreationContrat(contrat);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
    
 }

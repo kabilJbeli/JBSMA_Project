@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>JBSystemManagementAffaire</display-name>
+  
+  <context-param>
+    <param-name>com.ocpsoft.pretty.DEVELOPMENT</param-name>
+    <param-value>true</param-value>
+</context-param>
+<context-param>
+    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    <param-value>client</param-value>
+</context-param>
+
   <context-param>
     <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
     <param-value>.xhtml</param-value>
@@ -15,10 +25,14 @@
     <url-pattern>/faces/*</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>CreationContrat.xhtml</welcome-file>
+    <welcome-file>faces/CreationContrat.xhtml</welcome-file>
   </welcome-file-list>
-  <servlet-mapping>
+    <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.xhtml</url-pattern>
+    <url-pattern>*.jsf</url-pattern>
   </servlet-mapping>
+<servlet-mapping>
+  <servlet-name>Faces Servlet</servlet-name>
+  <url-pattern>*.xhtml</url-pattern>
+ </servlet-mapping>
 </web-app>

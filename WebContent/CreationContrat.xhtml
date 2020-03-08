@@ -1,45 +1,64 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"   
-      xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:p="http://richfaces.org/rich">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+      xmlns:p="http://primefaces.org/ui"
+
+       >
 
 <h:head>
-	<meta charset="utf-8" name="viewport"
+	<meta name="viewport"
 		content="width=device-width, initial-scale=1"
 		http-equiv="X-UA-Conpatible" />
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+		<h:outputStylesheet library="css" name="style.css" />
+				<h:outputScript library="js" name="jquery-3.4.1.min.js" target="head" /> 
+		
+
+		<h:outputScript library="js" name="bootstrap.min.js" target="head" /> 
+
+		
+	
 	<title>Creation des contrats</title>
-	<style type="text/css">
-.col-xs-updated {
-	width: 92% !important;
-}
-</style>
+	
 </h:head>
 <h:body>
-	<div class="container">
-		<div class="navbar navbar-inverse">
-			<div class="navbar-brand">Nouveaux contrat</div>
+<div class="navbar navbar-inverse">
+			<div class="container"><div class="navbar-brand">Nouveaux contrat</div></div>
 		</div>
+	<div class="container">
+	
 		<div class="row">
 			<div class="col-xs-12 col-xs-updated">
 				<h:form id="CreationContrat" styleClass="form-horizontal">
-<!-- 					<div class="form-group"> -->
-<!-- 						<h:outputLabel value="First Name" -->
-<!-- 							styleClass="control-label col-sm-2" /> -->
-<!-- 						<div class="col-sm-10"> -->
-<!-- 							<h:inputText value="#{CreationContrat.tiers.PRENOMTIER}" -->
-<!-- 								styleClass="form-control" /> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-					<div class="form-group">
-						<h:outputLabel value="produit"
-							styleClass="control-label col-sm-2" />
+
+	<div class="form-group">
+						<h:outputLabel value="Tier"
+							styleClass="text-left col-sm-2" />
 						<div class="col-sm-10">
-							<h:selectOneMenu value="#{CreationContrat.produit}" >
+						<div class="col-sm-10 no-gutters" style="padding:0px !important;">
+							<h:inputText  value="#{CreationContrat.tiers.NAMETIER}"
+								styleClass="form-control pull-left" disbaled="true" /></div>
+	<div class="col-sm-2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button></div>
+           <ui:include src="findTier.xhtml" />
+   
+
+						</div>
+					</div>
+
+
+	<div class="form-group">
+						<h:outputLabel value="produit"
+							styleClass="text-left  col-sm-2" />
+						<div class="col-sm-10">
+							<h:selectOneMenu value="#{CreationContrat.produit}" styleClass="form-control" >
 								<f:selectItems value="#{CreationContrat.produits}" var="produit" itemValue="#{produit}" itemLabel="#{produit.DESCRIPTION}" />
 								<h:message for="produit" />
 							</h:selectOneMenu>
@@ -47,16 +66,16 @@
 					</div>
 					<div class="form-group">
 						<h:outputLabel value="Date d'effet"
-							styleClass="control-label col-sm-2" />
+							styleClass="text-left col-sm-2" />
 						<div class="col-sm-10">
-							<h:inputText value="#{CreationContrat.dateEffet}"
+							<h:inputText  value="#{CreationContrat.dateEffet}"
 								styleClass="form-control" />
 						</div>
 					</div>
 
 					<div class="form-group">
 						<h:outputLabel value="Date Fin"
-							styleClass="control-label col-sm-2" />
+							styleClass="text-left  col-sm-2" />
 						<div class="col-sm-10">
 							<h:inputText value="#{CreationContrat.dateFin}"
 								styleClass="form-control" />
@@ -65,7 +84,7 @@
 					
 					<div class="form-group">
 						<h:outputLabel value="Montant de financement"
-							styleClass="control-label col-sm-2" />
+							styleClass="text-left col-sm-2" />
 						<div class="col-sm-10">
 							<h:inputText value="#{CreationContrat.mtfinancement}"
 								styleClass="form-control" />
