@@ -3,7 +3,9 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
->
+
+                   xmlns:p="http://primefaces.org/ui">
+               
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -13,24 +15,24 @@
           <span aria-hidden="true"></span>
         </button>
       </div>
-      <div class="modal-body">
-
-
-
+    <div class="modal-body">
 	<div class="form-group">
 	<div class="col-md-6">
-	<h:inputText binding="#{input}" value="#{CreationContrat.tiers.NAMETIER}" />
-	<h:commandButton value="Submit" action="#{CreationContrat.getListTiersByName()}" update="@all"></h:commandButton>
+	<h:inputText id="tierInputValue" value="#{CreationContrat.tierInputValue}" />
+	<h:commandButton  value="Submit"  >
+	<f:param name="action" action="#{CreationContrat.getListTiersByName(CreationContrat.tierInputValue)}" />	
+    <f:ajax execute="@form" render="@none" />
+    </h:commandButton>	
 	</div>
 	<div class="col-md-6">
 		<h:outputLabel value="Nom Tier"
-							styleClass="text-left  col-sm-3" />
-						<div class="col-sm-9">
+		styleClass="text-left  col-sm-3" />
+						<div class="col-sm-9">						
 							<h:selectOneMenu value="#{CreationContrat.tiers}" styleClass="form-control" >
 								<f:selectItems value="#{CreationContrat.listTiers}" var="tier" itemValue="#{tier}" itemLabel="#{tier.NAMETIER}" />
 								<h:message for="produit" />
 							</h:selectOneMenu>
-						</div>
+	</div>
 	</div>		
 </div>
 </div>

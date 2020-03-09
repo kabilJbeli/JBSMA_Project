@@ -80,12 +80,10 @@ public class TierManagement implements TierManagementLocal {
 		List<Tier> tier = null;
 		UserTransaction userTxn = sessionContext.getUserTransaction();
 		try {
-			userTxn.begin();
-			
-			Query query =getEntityManager().createNativeQuery("select * from Tier where NAMETIER=?").setParameter(1, name);
+			userTxn.begin();			
+			Query query = getEntityManager().createNativeQuery("select * from Tier where NAMETIER=?").setParameter(1, name);
 			tier = query.getResultList();
-			userTxn.commit();
-			
+			userTxn.commit();			
 		} catch (Throwable e) {
 			e.printStackTrace();
 			try {

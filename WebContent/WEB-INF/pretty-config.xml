@@ -2,11 +2,8 @@
 <pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.3.3.final"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.4.4.final.xsd">
- 
- 
+<url-mapping id="Tier">
     <pattern value="/tier" />
-    <view-id value="createtier.jsf" />    
+    <view-id value="/faces/CreationTiers.xhtml" />    
 </url-mapping>
-
-
 </pretty-config>

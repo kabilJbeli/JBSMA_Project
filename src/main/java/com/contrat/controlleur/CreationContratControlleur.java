@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.UIInput;
 
 import com.contrat.dao.ConfProduitLocal;
 import com.contrat.dao.ContratManagementLocal;
@@ -39,7 +40,8 @@ public class CreationContratControlleur {
     private LocalDate DateEcheance;
     private LocalDate DateFin;
     private Tier tiers =  new Tier();
-   
+    private String tierInputValue;
+
 	public ConfProduitLocal getDaoproduit() {
 		return daoproduit;
 	}
@@ -82,8 +84,10 @@ public class CreationContratControlleur {
 		return daoproduit.rechercheProduits();
 	}
 	
-	public void getListTiersByName() {
-		this.serachedTiers = daotier.findByName(tiers.getNAMETIER());
+	public void getListTiersByName(String name) {
+		if(!name.isEmpty()) {
+	 daotier.findByName(name);
+		}
 	}
 	
 	public List<Tier> getSearchedTier(){
@@ -131,6 +135,12 @@ public class CreationContratControlleur {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public String getTierInputValue() {
+		return tierInputValue;
+	}
+	public void setTierInputValue(String tierInputValue) {
+		this.tierInputValue =  tierInputValue;
 	}
    
 }
