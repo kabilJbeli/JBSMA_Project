@@ -82,7 +82,7 @@ public class TierManagement implements TierManagementLocal {
 		try {
 			userTxn.begin();
 			
-			Query query =getEntityManager().createNativeQuery("select * from Tier where NAMETIER="+name);
+			Query query =getEntityManager().createNativeQuery("select * from Tier where NAMETIER=?").setParameter(1, name);
 			tier = query.getResultList();
 			userTxn.commit();
 			

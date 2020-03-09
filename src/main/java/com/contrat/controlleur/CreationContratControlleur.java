@@ -38,7 +38,7 @@ public class CreationContratControlleur {
     private LocalDate DateEffet;
     private LocalDate DateEcheance;
     private LocalDate DateFin;
-    private Tier tiers;
+    private Tier tiers =  new Tier();
    
 	public ConfProduitLocal getDaoproduit() {
 		return daoproduit;
@@ -70,7 +70,15 @@ public class CreationContratControlleur {
 	public void setTiers(Tier tiers) {
 		this.tiers = tiers;
 	}
-	public List<Produit> getProduits() {
+	public List<Produit> getProduits() throws ParseException {
+//		Contrat contrat = new Contrat();
+//		contrat.setProduit(daoproduit.rechercheProduits().get(0));
+//		contrat.setDATEDEBUT(LocalDate.now());
+//		contrat.setTier(daotier.getAll().get(0));
+//		contrat.setMTFINANCEMENT(100000);
+//		contrat.setDUREE(240);
+//		contrat.setDATEDEBUT(LocalDate.now());
+//		daocontrat.CreationContrat(contrat);
 		return daoproduit.rechercheProduits();
 	}
 	
@@ -111,10 +119,11 @@ public class CreationContratControlleur {
 	public void setDateFin(LocalDate dateFin) {
 		DateFin = dateFin;
 	}
-	public void CreationNouveauxContrat() {
+	public void CreationNouveauxContrat() throws ParseException {
 		Contrat contrat = new Contrat();
 		contrat.setDATEDEBUT(DateEffet);
 		contrat.setDATEFIN(DateFin);
+		contrat.setDATEECHEANCE(DateEcheance);
 		contrat.setMTFINANCEMENT(Mtfinancement);
 		try {
 			daocontrat.CreationContrat(contrat);
