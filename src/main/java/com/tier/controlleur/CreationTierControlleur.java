@@ -1,5 +1,7 @@
 package com.tier.controlleur;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
@@ -53,7 +55,7 @@ public class CreationTierControlleur {
 	
 	public void createTier() {	
 		Tier tier = new Tier();
-				tier.setADRESSETIER(ADRESSETIER);
+		tier.setADRESSETIER(ADRESSETIER);
 		tier.setCINTIER(CINTIER);
 		tier.setNAMETIER(NAMETIER);
 		tier.setPRENOMTIER(PRENOMTIER);	
@@ -63,6 +65,11 @@ public class CreationTierControlleur {
     public Tier getTiers() {
 		return tiers;
 	}
+    
+    public List<Tier> getAllTiers(){
+    	
+    	return daotier.getAll();
+    }
 	public void setTiers(Tier tiers) {
 		this.tiers = tiers;
 	}

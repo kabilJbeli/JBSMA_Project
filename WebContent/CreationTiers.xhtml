@@ -15,7 +15,19 @@
 				<h:outputScript library="js" name="jquery-3.4.1.min.js" target="head" /> 		
 
 		<h:outputScript library="js" name="bootstrap.min.js" target="head" /> 
-
+<style>
+.modal-body table {
+    width: 100%;
+}
+thead th {
+    background-color: #337ab7;
+    color: #fff;
+    padding: 15px;
+}
+tbody td {
+    padding: 15px;
+}
+</style>
 <title>Not present in rendered output</title>
 </h:head>
 <body>
@@ -66,9 +78,14 @@
 							<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<h:commandButton value="Create" action="#{CreationTier.createTier()}" styleClass="btn btn-default" />
-						</div>
+						</div> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+ View tier list
+</button>
 					</div>
 						</h:form>
+						
+						  <ui:include src="TierList.xhtml" />
+						
 </div>
 </body>
 </html>
