@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.tier.dao.TierManagementLocal;
 import com.tier.entities.Tier;
 
+
+
 @ManagedBean(name = "CreationTier")
 @RequestScoped
 @Stateless
@@ -24,6 +26,17 @@ public class CreationTierControlleur {
 	private String ADRESSETIER;
 	private Integer CINTIER;
 	private String NAMETIER;
+	private String PRENOMTIER;	
+	private Boolean iseditable=false;
+	
+	
+	public Boolean getIseditable() {
+		return iseditable;
+	}
+
+	public void setIseditable(Boolean iseditable) {
+		this.iseditable = iseditable;
+	}
 	public String getADRESSETIER() {
 		return ADRESSETIER;
 	}
@@ -53,10 +66,8 @@ public class CreationTierControlleur {
 	}
 
 	public void setPRENOMTIER(String pRENOMTIER) {
-		PRENOMTIER = pRENOMTIER;
+		this.PRENOMTIER = pRENOMTIER;
 	}
-	private String PRENOMTIER;
-	private HttpServletResponse response;
 	
 	public void createTier() {	
 		Tier tier = new Tier();
@@ -67,21 +78,12 @@ public class CreationTierControlleur {
 		daotier.creation(tier);
 	}
     
-	public void updateTier(Tier tier) {
-		response = null;
-		Tier tierToUpdate = new Tier();
-		this.tiers.setADRESSETIER(tier.getADRESSETIER());
-		this.tiers.setCINTIER(tier.getCINTIER());
-		this.tiers.setNAMETIER(tier.getNAMETIER());
-		this.tiers.setPRENOMTIER(tier.getPRENOMTIER());
+	public void updateTier() {
+		this.iseditable = true;
 		
 	}
 	
-	public void setTierToUpdate(Tier tier) {
-		
-		
-		
-	}
+
 	public void deleteTier(Tier tier) {
 
 			daotier.delete(tier);
@@ -92,7 +94,7 @@ public class CreationTierControlleur {
     public Tier getTiers() {
 		return tiers;
 	}
-    
+
     public List<Tier> getAllTiers(){
     	
     	return daotier.getAll();

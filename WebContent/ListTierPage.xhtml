@@ -30,6 +30,7 @@ thead th {
 tbody td {
   text-align: center;
     padding: 15px;
+    color:#000;
 }
 </style>
 <title>Not present in rendered output</title>
@@ -46,25 +47,33 @@ tbody td {
 <h:form>
 <h:dataTable value = "#{CreationTier.allTiers}" var = "tier"
 >
+
    
    <h:column>    				
       <f:facet name = "header">Name</f:facet>    				
-      #{tier.NAMETIER}
+			<h:inputText  value="#{tier.NAMETIER}" rendered="#{CreationTier.iseditable}"  style="padding:0px;" styleClass="form-control pull-left" ></h:inputText>
+    				
+    		<h:outputText value="#{tier.NAMETIER}" rendered="#{not CreationTier.iseditable}" />
    </h:column>
    
    <h:column>
       <f:facet name = "header">Last Name</f:facet>
-       #{tier.PRENOMTIER}
+				<h:inputText  value="#{tier.PRENOMTIER}" rendered="#{CreationTier.iseditable}" style="padding:0px;" styleClass="form-control pull-left" ></h:inputText>
+				<h:outputText value="#{tier.PRENOMTIER}" rendered="#{not CreationTier.iseditable}" />
    </h:column>
    
    <h:column>
       <f:facet name = "header">Addresse</f:facet>
-     #{tier.ADRESSETIER}
-   </h:column>
+      
+      	<h:inputText  value="#{tier.ADRESSETIER}" rendered="#{CreationTier.iseditable}" style="padding:0px;" styleClass="form-control pull-left" ></h:inputText>
+				<h:outputText value="#{tier.ADRESSETIER}" rendered="#{not CreationTier.iseditable}" />
+ </h:column>
    
    <h:column>
       <f:facet name = "header">CIN</f:facet>
-       #{tier.CINTIER}
+	<h:inputText  value="#{tier.CINTIER}" rendered="#{CreationTier.iseditable}" style="padding:0px;" styleClass="form-control pull-left" ></h:inputText>
+						
+						<h:outputText value="#{tier.CINTIER}" rendered="#{not CreationTier.iseditable}" />
    </h:column>
    
    <h:column>
@@ -74,7 +83,10 @@ tbody td {
    
       <h:column>
       <f:facet name = "header">Update</f:facet>
-		<h:commandButton value="Update" action="#{CreationTier.updateTier(tier)}" onclick="window.location.href='/JBSystemManagementAffaire/updateTier.xhtml';" styleClass="btn btn-default" />
+	<h:commandLink value="Edit" action="#{CreationTier.updateTier()}" rendered="#{not CreationTier.iseditable}" >
+	<f:ajax execute="@form" render="@form" />
+	
+	</h:commandLink>
    </h:column>
 </h:dataTable>
 </h:form>
