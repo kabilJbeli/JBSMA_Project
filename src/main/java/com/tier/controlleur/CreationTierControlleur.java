@@ -1,12 +1,16 @@
 package com.tier.controlleur;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.tier.dao.TierManagementLocal;
 import com.tier.entities.Tier;
 
@@ -16,7 +20,7 @@ import com.tier.entities.Tier;
 public class CreationTierControlleur {
 	@EJB
 	TierManagementLocal daotier;
-    private Tier tiers;
+    private Tier tiers = new Tier();
 	private String ADRESSETIER;
 	private Integer CINTIER;
 	private String NAMETIER;
@@ -52,6 +56,7 @@ public class CreationTierControlleur {
 		PRENOMTIER = pRENOMTIER;
 	}
 	private String PRENOMTIER;
+	private HttpServletResponse response;
 	
 	public void createTier() {	
 		Tier tier = new Tier();
@@ -62,7 +67,21 @@ public class CreationTierControlleur {
 		daotier.creation(tier);
 	}
     
+	public void updateTier(Tier tier) {
+		response = null;
+		Tier tierToUpdate = new Tier();
+		this.tiers.setADRESSETIER(tier.getADRESSETIER());
+		this.tiers.setCINTIER(tier.getCINTIER());
+		this.tiers.setNAMETIER(tier.getNAMETIER());
+		this.tiers.setPRENOMTIER(tier.getPRENOMTIER());
+		
+	}
 	
+	public void setTierToUpdate(Tier tier) {
+		
+		
+		
+	}
 	public void deleteTier(Tier tier) {
 
 			daotier.delete(tier);

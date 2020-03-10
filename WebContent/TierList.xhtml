@@ -46,6 +46,11 @@
       <f:facet name = "header">Delete</f:facet>
 		<h:commandButton value="Delete" action="#{CreationTier.deleteTier(tier)}" styleClass="btn btn-default" />
    </h:column>
+   
+      <h:column>
+      <f:facet name = "header">Update</f:facet>
+		<h:commandButton value="Update" action="#{CreationTier.updateTier(tier)}" onclick="window.location.href='/JBSystemManagementAffaire/updateTier.xhtml';" styleClass="btn btn-default" />
+   </h:column>
 </h:dataTable>
 
 </div>

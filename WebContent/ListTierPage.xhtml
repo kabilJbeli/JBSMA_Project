@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	 <h:head>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+		<h:outputStylesheet library="css" name="style.css" />
+				<h:outputScript library="js" name="jquery-3.4.1.min.js" target="head" /> 		
+
+		<h:outputScript library="js" name="bootstrap.min.js" target="head" /> 
+<style>
+ table {
+    width: 100%;
+}
+thead th {
+    color: #000;
+    padding: 5px 15px;
+    border-bottom: 1px solid #000;
+    text-align: center;
+}
+tbody td {
+  text-align: center;
+    padding: 15px;
+}
+</style>
+<title>Not present in rendered output</title>
+</h:head>
+<body>
+<div class="navbar navbar-inverse">
+			<div class="container"><div class="navbar-brand">Tier List</div>
+			<div class="col-md-10 pull-right">
+			<ui:include src="menu.xhtml" />
+			</div>
+			</div>
+		</div>
+	<div class="container">		
+<h:form>
+<h:dataTable value = "#{CreationTier.allTiers}" var = "tier"
+>
+   
+   <h:column>    				
+      <f:facet name = "header">Name</f:facet>    				
+      #{tier.NAMETIER}
+   </h:column>
+   
+   <h:column>
+      <f:facet name = "header">Last Name</f:facet>
+       #{tier.PRENOMTIER}
+   </h:column>
+   
+   <h:column>
+      <f:facet name = "header">Addresse</f:facet>
+     #{tier.ADRESSETIER}
+   </h:column>
+   
+   <h:column>
+      <f:facet name = "header">CIN</f:facet>
+       #{tier.CINTIER}
+   </h:column>
+   
+   <h:column>
+      <f:facet name = "header">Delete</f:facet>
+		<h:commandButton value="Delete" action="#{CreationTier.deleteTier(tier)}" styleClass="btn btn-default" />
+   </h:column>
+   
+      <h:column>
+      <f:facet name = "header">Update</f:facet>
+		<h:commandButton value="Update" action="#{CreationTier.updateTier(tier)}" onclick="window.location.href='/JBSystemManagementAffaire/updateTier.xhtml';" styleClass="btn btn-default" />
+   </h:column>
+</h:dataTable>
+</h:form>
+</div>
+</body>
+</html>
