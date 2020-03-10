@@ -46,7 +46,7 @@ public class TierManagement implements TierManagementLocal {
 		UserTransaction userTxn = sessionContext.getUserTransaction();
 		try {
 			userTxn.begin();
-			getEntityManager().remove(T);
+			getEntityManager().remove(getEntityManager().find(Tier.class, T.getIDTIER()));;
 			userTxn.commit();
 		} catch (Throwable e) {
 			e.printStackTrace();

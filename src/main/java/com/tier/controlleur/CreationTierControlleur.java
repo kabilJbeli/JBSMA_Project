@@ -62,6 +62,14 @@ public class CreationTierControlleur {
 		daotier.creation(tier);
 	}
     
+	
+	public void deleteTier(Tier tier) {
+
+			daotier.delete(tier);
+	
+			
+		
+	}
     public Tier getTiers() {
 		return tiers;
 	}
