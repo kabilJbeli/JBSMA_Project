@@ -9,6 +9,7 @@ public interface TierManagementLocal {
 	public void delete(Tier T);
 	public void update(Tier T);
 	public List<Tier> findByName(String name);
+	public List<Tier> findByCIN(Integer CIN);
 	public List<Tier> getAll();
 	public void creation (Tier T);
 }

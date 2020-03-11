@@ -118,4 +118,24 @@ public class TierManagement implements TierManagementLocal {
 		Query query = entityManager.createNativeQuery("select * from Tier", Tier.class);
 		return query.getResultList();
 	}
+
+	@Override
+	public List<Tier> findByCIN(Integer CIN) {
+		List<Tier> tier = null;
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();			
+			Query query = getEntityManager().createNativeQuery("select * from Tier where CINTIER=?").setParameter(1, CIN);
+			tier = query.getResultList();
+			userTxn.commit();			
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return tier;
+	}
 }

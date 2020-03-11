@@ -41,6 +41,14 @@ public class CreationContratControlleur {
     private Tier tiers =  new Tier();
     private String tierInputValue;
     private String tierName;
+    public Integer getTierCIN() {
+		return tierCIN;
+	}
+	public void setTierCIN(Integer tierCIN) {
+		this.tierCIN = tierCIN;
+	}
+	private Integer tierCIN;
+    
 
 	public String getTierName() {
 		return tierName;
@@ -93,6 +101,13 @@ public class CreationContratControlleur {
 	public void getListTiersByName() {
 		if(!tierName.isEmpty()) {
 	this.serachedTiers = daotier.findByName(String.valueOf(tierName));
+		}
+	}
+	
+	
+	public void getListTiersByCIN() {
+		if(tierCIN != null) {
+	this.serachedTiers = daotier.findByCIN(tierCIN);
 		}
 	}
 	

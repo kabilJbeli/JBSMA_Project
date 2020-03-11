@@ -36,8 +36,10 @@
 	<div class="container">
 	
 		<div class="row">
+		
 			<div class="col-xs-12 col-xs-updated">
 				<h:form id="CreationContrat" styleClass="form-horizontal">
+           <ui:include src="findTier.xhtml" />
 
 	<div class="form-group">
 	<h:outputLabel value="Tier"	styleClass="text-left col-sm-2"  />
@@ -49,7 +51,6 @@
 	<div class="col-sm-1" style="padding:0px;"><button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
 Find tier
 </button></div>
-           <ui:include src="findTier.xhtml" />
 						</div>
 					</div>
 

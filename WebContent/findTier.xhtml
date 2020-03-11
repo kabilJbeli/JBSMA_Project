@@ -19,6 +19,8 @@
     <h:form>
 	<div class="form-group">
 	<div class="col-md-6">
+		<span style="padding-left:15px">Search by Name</span>
+	
 	<div class="col-md-11"><h:inputText id="tierInputValue" value="#{CreationContrat.tierName}" styleClass="form-control" /></div>
 	<div class="col-md-1" style="padding:0px;"><h:commandButton  value="Submit" action="#{CreationContrat.getListTiersByName()}" styleClass="btn btn-danger" >
     <f:ajax execute="@form" render="selectTier"  update="selectTier" />
@@ -27,15 +29,31 @@
 	</div>
 	
 	<div class="col-md-6">
-		<h:outputLabel value="Nom Tier"
-		styleClass="text-left  col-sm-3" />
-						<div class="col-sm-9">						
+		<h:outputLabel value="Tier List"
+		styleClass="text-left " style="padding-left:15px;" />
+						<div class="col-sm-12">						
 							<h:selectOneMenu id="selectTier" value="#{CreationContrat.tiers}" styleClass="form-control" >
 								<f:selectItems  value="#{CreationContrat.searchedTier}" var="tier" itemValue="#{tier}" itemLabel="#{tier[3]}" />
 								<h:message for="selectTier" />
 							</h:selectOneMenu>
 	</div>
 	</div>		
+</div>
+
+
+
+
+	<div class="form-group">
+	<div class="col-md-6">
+		<span style="padding-left:15px;">Search by CIN</span>
+	
+	<div class="col-md-11"><h:inputText  value="#{CreationContrat.tierCIN}" styleClass="form-control" /></div>
+	<div class="col-md-1" style="padding:0px;"><h:commandButton  value="Submit" action="#{CreationContrat.getListTiersByCIN()}" styleClass="btn btn-danger" >
+    <f:ajax execute="@form" render="selectTier"  update="selectTier" />
+    </h:commandButton>	</div>
+    
+	</div>
+	
 </div>
 </h:form>
 </div>
