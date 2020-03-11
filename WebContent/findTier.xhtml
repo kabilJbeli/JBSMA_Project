@@ -18,12 +18,14 @@
     <div class="modal-body">
 	<div class="form-group">
 	<div class="col-md-6">
-	<h:inputText id="tierInputValue" value="#{CreationContrat.tierInputValue}" />
-	<h:commandButton  value="Submit"  >
+	<div class="col-md-11"><h:inputText id="tierInputValue" value="#{CreationContrat.tierInputValue}" styleClass="form-control" /></div>
+	<div class="col-md-1" style="padding:0px;"><h:commandButton  value="Submit" styleClass="btn btn-danger" >
 	<f:param name="action" action="#{CreationContrat.getListTiersByName(CreationContrat.tierInputValue)}" />	
     <f:ajax execute="@form" render="@none" />
-    </h:commandButton>	
+    </h:commandButton>	</div>
+    
 	</div>
+	
 	<div class="col-md-6">
 		<h:outputLabel value="Nom Tier"
 		styleClass="text-left  col-sm-3" />
