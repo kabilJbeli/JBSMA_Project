@@ -40,14 +40,14 @@
 				<h:form id="CreationContrat" styleClass="form-horizontal">
 
 	<div class="form-group">
-	<h:outputLabel value="Tier"	styleClass="text-left col-sm-2" />
+	<h:outputLabel value="Tier"	styleClass="text-left col-sm-2"  />
 						<div class="col-sm-10">
-						<div class="col-sm-10 no-gutters" style="padding:0px !important;">
+						<div class="col-sm-11 no-gutters" style="padding:0px !important;">
 							<h:inputText  value="#{CreationContrat.tiers.NAMETIER}"
 								styleClass="form-control pull-left" disbaled="true" />
 						</div>								
-	<div class="col-sm-2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
+	<div class="col-sm-1" style="padding:0px;"><button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
+Find tier
 </button></div>
            <ui:include src="findTier.xhtml" />
 						</div>
