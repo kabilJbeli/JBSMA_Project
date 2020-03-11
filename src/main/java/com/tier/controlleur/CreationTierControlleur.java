@@ -9,10 +9,11 @@ import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import com.tier.dao.TierManagementLocal;
 import com.tier.entities.Tier;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 
 
@@ -21,7 +22,7 @@ import com.tier.entities.Tier;
 @Stateless
 public class CreationTierControlleur {
 	@EJB
-	TierManagementLocal daotier;
+	private TierManagementLocal daotier;
     private Tier tiers = new Tier();
 	private String ADRESSETIER;
 	private Integer CINTIER;
@@ -66,23 +67,35 @@ public class CreationTierControlleur {
 	}
 
 	public void setPRENOMTIER(String pRENOMTIER) {
-		this.PRENOMTIER = pRENOMTIER;
+		PRENOMTIER = pRENOMTIER;
 	}
-	
+
 	public void createTier() {	
 		Tier tier = new Tier();
 		tier.setADRESSETIER(ADRESSETIER);
 		tier.setCINTIER(CINTIER);
 		tier.setNAMETIER(NAMETIER);
 		tier.setPRENOMTIER(PRENOMTIER);	
+		tier.setIseditable(false);
 		daotier.creation(tier);
 	}
     
-	public void updateTier() {
-		this.iseditable = true;
-		
+	public void setEditable(Tier tier) {
+		tier.setIseditable(true);
+		daotier.update(tier);
 	}
 	
+public void updateTier(Tier T) {	
+	
+T.setIseditable(false);
+T.setADRESSETIER(ADRESSETIER);
+T.setCINTIER(CINTIER);
+T.setNAMETIER(NAMETIER);
+T.setPRENOMTIER(PRENOMTIER);
+daotier.update(T);	
+
+}
+
 
 	public void deleteTier(Tier tier) {
 

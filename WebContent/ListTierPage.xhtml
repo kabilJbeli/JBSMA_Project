@@ -50,30 +50,43 @@ tbody td {
 
    
    <h:column>    				
-      <f:facet name = "header">Name</f:facet>    				
-			<h:inputText  value="#{tier.NAMETIER}" rendered="#{CreationTier.iseditable}"  style="padding:0px;" styleClass="form-control pull-left" ></h:inputText>
+      <f:facet name = "header">Name</f:facet>    
+                  #{CreationTier.setNAMETIER(tier.NAMETIER)}
+			
+			<h:inputText  value="#{CreationTier.NAMETIER}" rendered="#{tier.iseditable}"  style="padding:0px;" styleClass="form-control pull-left" >
+
+			</h:inputText>
     				
-    		<h:outputText value="#{tier.NAMETIER}" rendered="#{not CreationTier.iseditable}" />
+    		<h:outputText value="#{CreationTier.NAMETIER}" rendered="#{not tier.iseditable}" />
    </h:column>
    
    <h:column>
       <f:facet name = "header">Last Name</f:facet>
-				<h:inputText  value="#{tier.PRENOMTIER}" rendered="#{CreationTier.iseditable}" style="padding:0px;" styleClass="form-control pull-left" ></h:inputText>
-				<h:outputText value="#{tier.PRENOMTIER}" rendered="#{not CreationTier.iseditable}" />
+                  #{CreationTier.setPRENOMTIER(tier.PRENOMTIER)}
+      
+				<h:inputText  value="#{CreationTier.PRENOMTIER}" rendered="#{tier.iseditable}" style="padding:0px;" styleClass="form-control pull-left" >
+
+				</h:inputText>
+				<h:outputText value="#{tier.PRENOMTIER}" rendered="#{not tier.iseditable}" />
    </h:column>
    
    <h:column>
       <f:facet name = "header">Addresse</f:facet>
+            #{CreationTier.setADRESSETIER(tier.ADRESSETIER)}
       
-      	<h:inputText  value="#{tier.ADRESSETIER}" rendered="#{CreationTier.iseditable}" style="padding:0px;" styleClass="form-control pull-left" ></h:inputText>
-				<h:outputText value="#{tier.ADRESSETIER}" rendered="#{not CreationTier.iseditable}" />
+      	<h:inputText  value="#{CreationTier.ADRESSETIER}" rendered="#{tier.iseditable}" style="padding:0px;" styleClass="form-control pull-left" ></h:inputText>	
+				<h:outputText value="#{tier.ADRESSETIER}" rendered="#{not tier.iseditable}" />
+				
  </h:column>
    
    <h:column>
       <f:facet name = "header">CIN</f:facet>
-	<h:inputText  value="#{tier.CINTIER}" rendered="#{CreationTier.iseditable}" style="padding:0px;" styleClass="form-control pull-left" ></h:inputText>
+      #{CreationTier.setCINTIER(tier.CINTIER)}
+	<h:inputText id="CINTIER" value="#{CreationTier.CINTIER}" rendered="#{tier.iseditable}" style="padding:0px;" styleClass="form-control pull-left" >
+	  
+	</h:inputText>
 						
-						<h:outputText value="#{tier.CINTIER}" rendered="#{not CreationTier.iseditable}" />
+   <h:outputText value="#{tier.CINTIER}" rendered="#{not tier.iseditable}" />
    </h:column>
    
    <h:column>
@@ -83,10 +96,14 @@ tbody td {
    
       <h:column>
       <f:facet name = "header">Update</f:facet>
-	<h:commandLink value="Edit" action="#{CreationTier.updateTier()}" rendered="#{not CreationTier.iseditable}" >
+	<h:commandLink value="Edit" action="#{CreationTier.setEditable(tier)}" rendered="#{not tier.iseditable}" >
+	
 	<f:ajax execute="@form" render="@form" />
 	
 	</h:commandLink>
+	
+	<h:commandButton value="Update" action="#{CreationTier.updateTier(tier)}" rendered="#{tier.iseditable}" />
+	
    </h:column>
 </h:dataTable>
 </h:form>

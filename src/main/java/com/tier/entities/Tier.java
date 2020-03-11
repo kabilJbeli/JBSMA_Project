@@ -21,6 +21,15 @@ public class Tier implements Serializable {
 	private String NAMETIER;
 	private String PRENOMTIER;
 	private String ADRESSETIER;
+	private Boolean iseditable;
+	
+	public Boolean getIseditable() {
+		return iseditable;
+	}
+	public void setIseditable(Boolean iseditable) {
+		this.iseditable = iseditable;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	public Tier() {
@@ -47,12 +56,16 @@ public class Tier implements Serializable {
 	public void setNAMETIER(String NAMETIER) {
 		this.NAMETIER = NAMETIER;
 	}   
-	public String getPRENOMTIER() {
+	public String ADRESSETIER() {
 		return this.PRENOMTIER;
 	}
 
 	public void setPRENOMTIER(String PRENOMTIER) {
 		this.PRENOMTIER = PRENOMTIER;
+	}   
+
+	public String getPRENOMTIER() {
+		return PRENOMTIER;
 	}   
 	public String getADRESSETIER() {
 		return this.ADRESSETIER;
