@@ -12,4 +12,7 @@ import com.contrat.entities.Produit;
 public interface ConfProduitLocal {
 	public Produit rechercheProduit(int IdProduit);
 	public List<Produit> rechercheProduits();
+	public void Creation (Produit produit);
+	public void delete (Produit produit);
+	public void modifier(Produit produit);
 }

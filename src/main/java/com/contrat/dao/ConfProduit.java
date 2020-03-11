@@ -9,22 +9,11 @@ import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
-
-import org.hibernate.Session;
-
 import com.contrat.entities.Produit;
-import com.tier.entities.Tier;
 
 /**
  * Session Bean implementation class ConfProduit
@@ -40,7 +29,7 @@ public class ConfProduit implements ConfProduitLocal {
 
 	public ConfProduit() {
 	}
-	
+
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}
@@ -48,7 +37,7 @@ public class ConfProduit implements ConfProduitLocal {
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
-	
+
 	@Override
 	public Produit rechercheProduit(int idproduit) {
 		Produit produit = new Produit();
@@ -71,8 +60,73 @@ public class ConfProduit implements ConfProduitLocal {
 
 	@Override
 	public List<Produit> rechercheProduits() {
-		Query query = entityManager.createNativeQuery("select * from produit", Produit.class);
-		return query.getResultList();
-}
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();
+			Query query = entityManager.createNativeQuery("select * from produit", Produit.class);
+			List<Produit> produits = query.getResultList();
+			userTxn.commit();
+			return produits;
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public void Creation(Produit produit) {
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();
+			getEntityManager().persist(produit);
+			userTxn.commit();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void delete(Produit produit) {
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();
+			getEntityManager().remove(produit);
+			userTxn.commit();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void modifier(Produit produit) {
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();
+			getEntityManager().merge(produit);
+			userTxn.commit();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
 
 }
