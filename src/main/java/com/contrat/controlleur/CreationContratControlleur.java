@@ -32,7 +32,6 @@ public class CreationContratControlleur {
 	ServiceContratLocal daocontrat;
 	@EJB
 	TierManagementLocal daotier;
-	private String tierName;
 	public List<Tier> serachedTiers;
     private Produit produit;
     private double Mtfinancement;
@@ -41,7 +40,14 @@ public class CreationContratControlleur {
     private LocalDate DateFin;
     private Tier tiers =  new Tier();
     private String tierInputValue;
+    private String tierName;
 
+	public String getTierName() {
+		return tierName;
+	}
+	public void setTierName(String tierName) {
+		this.tierName = tierName;
+	}
 	public ConfProduitLocal getDaoproduit() {
 		return daoproduit;
 	}
@@ -84,9 +90,9 @@ public class CreationContratControlleur {
 		return daoproduit.rechercheProduits();
 	}
 	
-	public void getListTiersByName(String name) {
-		if(!name.isEmpty()) {
-	 daotier.findByName(name);
+	public void getListTiersByName() {
+		if(!tierName.isEmpty()) {
+	this.serachedTiers = daotier.findByName(String.valueOf(tierName));
 		}
 	}
 	

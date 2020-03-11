@@ -16,12 +16,12 @@
         </button>
       </div>
     <div class="modal-body">
+    <h:form>
 	<div class="form-group">
 	<div class="col-md-6">
-	<div class="col-md-11"><h:inputText id="tierInputValue" value="#{CreationContrat.tierInputValue}" styleClass="form-control" /></div>
-	<div class="col-md-1" style="padding:0px;"><h:commandButton  value="Submit" styleClass="btn btn-danger" >
-	<f:param name="action" action="#{CreationContrat.getListTiersByName(CreationContrat.tierInputValue)}" />	
-    <f:ajax execute="@form" render="@none" />
+	<div class="col-md-11"><h:inputText id="tierInputValue" value="#{CreationContrat.tierName}" styleClass="form-control" /></div>
+	<div class="col-md-1" style="padding:0px;"><h:commandButton  value="Submit" action="#{CreationContrat.getListTiersByName()}" styleClass="btn btn-danger" >
+    <f:ajax execute="@form" render="selectTier"  update="selectTier" />
     </h:commandButton>	</div>
     
 	</div>
@@ -30,13 +30,14 @@
 		<h:outputLabel value="Nom Tier"
 		styleClass="text-left  col-sm-3" />
 						<div class="col-sm-9">						
-							<h:selectOneMenu value="#{CreationContrat.tiers}" styleClass="form-control" >
-								<f:selectItems value="#{CreationContrat.listTiers}" var="tier" itemValue="#{tier}" itemLabel="#{tier.NAMETIER}" />
-								<h:message for="produit" />
+							<h:selectOneMenu id="selectTier" value="#{CreationContrat.tiers}" styleClass="form-control" >
+								<f:selectItems  value="#{CreationContrat.searchedTier}" var="tier" itemValue="#{tier}" itemLabel="#{tier[3]}" />
+								<h:message for="selectTier" />
 							</h:selectOneMenu>
 	</div>
 	</div>		
 </div>
+</h:form>
 </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
