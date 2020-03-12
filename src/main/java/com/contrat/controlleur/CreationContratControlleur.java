@@ -40,7 +40,14 @@ public class CreationContratControlleur {
     private LocalDate DateFin;
     private Tier tiers =  new Tier();
     private String tierInputValue;
-    public Boolean getUpdateFindTier() {
+    private Integer selectedTierId;
+    public Integer getSelectedTierId() {
+		return selectedTierId;
+	}
+	public void setSelectedTierId(Integer selectedTierId) {
+		this.selectedTierId = selectedTierId;
+	}
+	public Boolean getUpdateFindTier() {
 		return updateFindTier;
 	}
 	public void setUpdateFindTier(Boolean updateFindTier) {
@@ -171,6 +178,12 @@ public class CreationContratControlleur {
 	}
 	public void setTierInputValue(String tierInputValue) {
 		this.tierInputValue =  tierInputValue;
+	}
+	public void updateSeletedTier() {
+		if(selectedTierId != null) {
+	this.tiers = (Tier) daotier.findByCIN(selectedTierId);
+		}
+		
 	}
    
 }

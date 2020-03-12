@@ -28,12 +28,12 @@
     
 	</div>
 	
-	<div class="col-md-6">
+	<div class="col-md-6" style="padding-right: 0px;">
 		<h:outputLabel value="Tier List"
 		styleClass="text-left " style="padding-left:15px;" />
-						<div class="col-sm-12">						
-							<h:selectOneMenu readonly="#{CreationContrat.updateFindTier}" disabled="#{CreationContrat.updateFindTier}" id="selectTier" value="#{CreationContrat.tiers}" styleClass="form-control" >
-								<f:selectItems  value="#{CreationContrat.searchedTier}" var="tier" itemValue="#{tier}" itemLabel="#{tier[3]} #{tier[4]}" />
+						<div class="col-sm-12" style="padding-right: 0px;">						
+							<h:selectOneMenu readonly="#{CreationContrat.updateFindTier }" disabled="#{CreationContrat.updateFindTier}" id="selectTier" value="#{CreationContrat.selectedTierId}" styleClass="form-control" >
+								<f:selectItems  value="#{CreationContrat.searchedTier}" var="tier" itemValue="#{tier[1]}" itemLabel="#{tier[3]} #{tier[4]}"  />
 								<h:message for="selectTier" />
 							</h:selectOneMenu>
 	</div>
@@ -59,7 +59,12 @@
 </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        
+        <h:commandButton type="button" value="Save changes" action="#{CreationContrat.updateSeletedTier()}" styleClass="btn btn-primary" >
+    <f:ajax execute="@form" render="selectedTierForConntract"  update="selectedTierForConntract" />
+        <f:attribute  name="data-dismiss" value="modal" />
+    
+    </h:commandButton>
       </div>
     </div>
   </div>

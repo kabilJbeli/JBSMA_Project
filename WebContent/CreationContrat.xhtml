@@ -22,7 +22,20 @@
 
 		<h:outputScript library="js" name="bootstrap.min.js" target="head" /> 
 
-		
+		<style>
+		.form-group {
+    margin-bottom: 15px;
+    display: block;
+    float: left;
+    width: 100%;
+}
+.modal-body {
+    width: 100%;
+    float: left;
+}
+.modal-footer {
+    padding: 30px !important;}
+		</style>
 	
 	<title>Creation des contrats</title>
 	
@@ -45,7 +58,7 @@
 	<h:outputLabel value="Tier"	styleClass="text-left col-sm-2"  />
 						<div class="col-sm-10">
 						<div class="col-sm-11 no-gutters" style="padding:0px !important;">
-							<h:inputText readonly="true" disabled="true" value="#{CreationContrat.tiers.NAMETIER}"
+							<h:inputText id="selectedTierForConntract" readonly="true" disabled="true" value="#{CreationContrat.tiers.NAMETIER}"
 								styleClass="form-control pull-left" disbaled="true" />
 						</div>								
 	<div class="col-sm-1" style="padding:0px;"><button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
@@ -94,7 +107,7 @@ Find tier
 					
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<h:commandButton value="Create" action="#{CreationContrat.CreationNouveauxContrat()}" styleClass="btn btn-default" />
+							<h:commandButton value="Create" action="#{CreationContrat.CreationNouveauxContrat()}" styleClass="btn btn-danger" />
 						</div>
 					</div>
 				</h:form>

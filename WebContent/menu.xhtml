@@ -3,11 +3,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
       <style>
-      nav ul li {
-    display: inline-block;
-    float: right;
-    color: #fff;
-}
+
       nav ul li a {
     color: #fff;
     padding:15px;
@@ -16,29 +12,60 @@
         top: 5px;
         line-height:1.2;
 }
-     
+.navbar-nav>li>.dropdown-menu {
+width:100%;
+}
+     .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+
+    background-color: #6299c7;
+}
            nav ul li a:hover {
     color: #fff !important;
     
  
 }
+nav.navbar.navbar-inverse {
+    margin-bottom: 0px;
+    border: none;
+}
      
       </style>
       
-			<nav>
-			<ul>
-			<li>
-			<a href="CreationContrat.xhtml">Creation Contrat</a>
-			</li>
-			
-			<li>
-			<a href="CreationTiers.xhtml">Creation Tier</a>
-			</li>
-			
-				<li>
-			<a href="ListTierPage.xhtml">Tier List</a>
-			</li>
-			</ul>
-			</nav>
+      <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+ 
+    <ul class="nav navbar-nav pull-right">
+    
+         <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Product Management
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li>			<a href="ProduitManagement.xhtml">Config des produits</a>
+</li>
+        </ul>
+      </li>
+      
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tier Management
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li>			<a href="CreationTiers.xhtml">Creation Tier</a>
+</li>
+          <li><a href="ListTierPage.xhtml">Tier List</a></li>
+        </ul>
+      </li>
+   <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Contract Mnagement
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li>						<a href="CreationContrat.xhtml">Creation Contrat</a>
+
+</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 	</ui:composition>
 
