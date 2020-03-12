@@ -21,7 +21,6 @@ public class Facture implements Serializable {
 	@OneToOne(cascade = { CascadeType.MERGE })
 	private Echeance ECHEANCE;
 	private int Status;
-	private int signe;
 	private String DESCRIPTION;
 	private double MTTTC;
 	private double MTCOM;
@@ -50,14 +49,6 @@ public class Facture implements Serializable {
 
 	public void setMTCOM(double mTCOM) {
 		MTCOM = mTCOM;
-	}
-
-	public int getSigne() {
-		return signe;
-	}
-
-	public void setSigne(int signe) {
-		this.signe = signe;
 	}
 
 	public void setIDFACTURE(int IDFACTURE) {
