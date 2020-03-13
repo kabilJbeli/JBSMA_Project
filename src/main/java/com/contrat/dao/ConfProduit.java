@@ -100,7 +100,7 @@ public class ConfProduit implements ConfProduitLocal {
 		UserTransaction userTxn = sessionContext.getUserTransaction();
 		try {
 			userTxn.begin();
-			getEntityManager().remove(produit);
+			getEntityManager().remove(getEntityManager().find(Produit.class, produit.getIDCONF()));
 			userTxn.commit();
 		} catch (Throwable e) {
 			e.printStackTrace();

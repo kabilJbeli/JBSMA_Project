@@ -18,11 +18,32 @@ public class Produit implements Serializable {
 	private int IDCONF;
 	private String DESCRIPTION;
 	private double TAUXCOMM;
+	private double TAUXTVA;
+	private Boolean iseditable;
+	public Boolean getIseditable() {
+		return iseditable;
+	}
+
+	public void setIseditable(Boolean iseditable) {
+		this.iseditable = iseditable;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	public Produit() {
 		super();
 	}   
+	
+	public double TAUXTVA() {
+		return TAUXTVA;
+	}
+	public double getTAUXTVA() {
+		return TAUXTVA;
+	}
+	public void setTAUXTVA(double tAUXTVA) {
+		TAUXTVA = tAUXTVA;
+	}
+
 	public int getIDCONF() {
 		return this.IDCONF;
 	}

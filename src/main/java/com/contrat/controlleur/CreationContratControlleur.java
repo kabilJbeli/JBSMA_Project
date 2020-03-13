@@ -41,7 +41,8 @@ public class CreationContratControlleur {
     private Tier tiers =  new Tier();
     private String tierInputValue;
     private Integer selectedTierId;
-    public Integer getSelectedTierId() {
+
+	public Integer getSelectedTierId() {
 		return selectedTierId;
 	}
 	public void setSelectedTierId(Integer selectedTierId) {
@@ -185,5 +186,6 @@ public class CreationContratControlleur {
 		}
 		
 	}
+	
    
 }
