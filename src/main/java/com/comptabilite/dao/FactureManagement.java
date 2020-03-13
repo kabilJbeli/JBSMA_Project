@@ -84,22 +84,6 @@ public class FactureManagement implements FactureManagementLocal {
 		this.entityManager = entityManager;
 	}
 
-	@Override
-	public void annulation(Encaissement encaissement) {
-		UserTransaction userTxn = sessionContext.getUserTransaction();
-		try {
-			userTxn.begin();
-			getEntityManager().persist(encaissement);
-			userTxn.commit();
-		} catch (Throwable e) {
-			e.printStackTrace();
-			try {
-				userTxn.rollback();
-			} catch (IllegalStateException | SecurityException | SystemException e1) {
-				e1.printStackTrace();
-			}
-		}
-	}
 
 	@Override
 	public void modification(Facture facture) {

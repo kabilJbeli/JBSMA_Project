@@ -14,6 +14,6 @@ public interface EncaissementManagementLocal {
 	public List<Encaissement> FindbyContract(Contrat contrat);
 	public Encaissement FindbyFacture(Facture facture);
 	public void creation (Encaissement encaissement);
-	public Encaissement findbyID (int idfacture);
+	public Encaissement findbyID (int encaissement);
 
 }
