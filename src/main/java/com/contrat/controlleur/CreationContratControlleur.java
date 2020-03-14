@@ -110,21 +110,24 @@ public class CreationContratControlleur {
 	
 	public void getListTiersByName() {
 		if(!tierName.isEmpty()) {
-			this.updateFindTier = false;
-	this.searchedTiers = daotier.findByName(String.valueOf(tierName));
+	this.updateFindTier = false;
+	this.setsearchedTiers(daotier.findByName(String.valueOf(tierName)));
 		}
 	}
-	
 	
 	public void getListTiersByCIN() {
 		if(tierCIN != null) {
 			this.updateFindTier = false;
-	this.searchedTiers = daotier.findByCIN(tierCIN);
+	this.setsearchedTiers(daotier.findByCIN(tierCIN));
 		}
 	}
 	
-	public List<Tier> getSearchedTier(){
+	public List<Tier> getsearchedTiers(){
 		return searchedTiers;
+	}
+	
+	public void setsearchedTiers(List<Tier> searchedTiers){
+		this.searchedTiers = searchedTiers;
 	}
 	
 	public List<Tier> getListTiers() {

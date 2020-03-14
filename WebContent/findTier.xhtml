@@ -20,7 +20,8 @@
 		<span style="padding-left:15px">Search by Name</span>
 	
 	<div class="col-md-11"><h:inputText id="tierInputValue" value="#{CreationContrat.tierName}" styleClass="form-control" /></div>
-	<div class="col-md-1" style="padding:0px;"><h:commandButton  value="Submit" action="#{CreationContrat.getListTiersByName()}" styleClass="btn btn-danger" >
+	<div class="col-md-1" style="padding:0px;"><h:commandButton 
+    value="Submit" action="#{CreationContrat.getListTiersByName()}" styleClass="btn btn-danger" >
     <f:ajax execute="@form" render="selectTier"  update="selectTier" />
     </h:commandButton>	</div>
     
@@ -31,7 +32,7 @@
 		styleClass="text-left " style="padding-left:15px;" />
 						<div class="col-sm-12" style="padding-right: 0px;">						
 							<h:selectOneMenu  id="selectTier" value="#{CreationContrat.selectedTierId}" styleClass="form-control" >
-								<f:selectItems  value="#{CreationContrat.searchedTier}" var="tier" itemValue="#{tier[2]}" itemLabel="#{tier[3]} #{tier[4]}"  />
+								<f:selectItems  value="#{CreationContrat.searchedTiers}" var="tier" itemValue="#{tier[2]}" itemLabel="#{tier[3]} #{tier[4]}"  />
 								<h:message for="selectTier" />
 							</h:selectOneMenu>
 	</div>
