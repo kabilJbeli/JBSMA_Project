@@ -1,4 +1,4 @@
-package com.contabilite.service;
+package com.comptabilite.service;
 
 import java.util.List;
 

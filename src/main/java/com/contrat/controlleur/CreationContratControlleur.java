@@ -27,9 +27,9 @@ import com.tier.dao.TierManagementLocal;
 @Stateless
 public class CreationContratControlleur {
 	@EJB
-	ConfProduitLocal daoproduit;
+	ConfProduitLocal serviceProduit;
 	@EJB
-	ServiceContratLocal daocontrat;
+	ServiceContratLocal serviceContrat;
 	@EJB
 	TierManagementLocal daotier;
 	public List<Tier> serachedTiers;
@@ -72,10 +72,10 @@ public class CreationContratControlleur {
 		this.tierName = tierName;
 	}
 	public ConfProduitLocal getDaoproduit() {
-		return daoproduit;
+		return serviceProduit;
 	}
 	public void setDaoproduit(ConfProduitLocal daoproduit) {
-		this.daoproduit = daoproduit;
+		this.serviceProduit = daoproduit;
 	}
     public TierManagementLocal getDaotier() {
 		return daotier;
@@ -84,10 +84,10 @@ public class CreationContratControlleur {
 		this.daotier = daotier;
 	}
 	public ServiceContratLocal getDaocontrat() {
-		return daocontrat;
+		return serviceContrat;
 	}
 	public void setDaocontrat(ServiceContratLocal daocontrat) {
-		this.daocontrat = daocontrat;
+		this.serviceContrat = daocontrat;
 	}
 	public Produit getProduit() {
 		return produit;
@@ -110,7 +110,7 @@ public class CreationContratControlleur {
 //		contrat.setDUREE(240);
 //		contrat.setDATEDEBUT(LocalDate.now());
 //		daocontrat.CreationContrat(contrat);
-		return daoproduit.rechercheProduits();
+		return serviceProduit.rechercheProduits();
 	}
 	
 	public void getListTiersByName() {
@@ -168,7 +168,7 @@ public class CreationContratControlleur {
 		contrat.setDATEECHEANCE(DateEcheance);
 		contrat.setMTFINANCEMENT(Mtfinancement);
 		try {
-			daocontrat.CreationContrat(contrat);
+			serviceContrat.CreationContrat(contrat);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

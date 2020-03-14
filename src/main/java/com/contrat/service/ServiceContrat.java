@@ -61,6 +61,7 @@ public class ServiceContrat implements ServiceContratLocal {
     	
     }
     
+    @Override
     public double round(double montant) {
     	DecimalFormat df = new DecimalFormat () ;
     	df.setMaximumIntegerDigits(3);
@@ -75,6 +76,7 @@ public class ServiceContrat implements ServiceContratLocal {
     	return 0;
     }
     
+    @Override
     public double CalculeMontantTotale (List<Echeance> echeances) {
     	double MontantTotale = 0;
     	for (Echeance echeance: echeances) {
@@ -83,6 +85,7 @@ public class ServiceContrat implements ServiceContratLocal {
     	return MontantTotale;
     }
     
+    @Override
     public double calculeMontantInterets(List<Echeance> echeances) {
     	double MontantTotale = 0;
     	for (Echeance echeance: echeances) {
@@ -98,8 +101,11 @@ public class ServiceContrat implements ServiceContratLocal {
     	contrat.setMTTTC(round(CalculeMontantTotale(contrat.getEcheances())));
     	contrat.setDATEDEBUT(contrat.getDATEDEBUT().plusMonths(1));
     	daoContrat.creation(contrat);
-
-
+    }
+    
+    @Override
+    public Contrat RechercheContratParNumero (String NumeroContrat) {
+    	return daoContrat.findByName(NumeroContrat);
     }
 
 }
