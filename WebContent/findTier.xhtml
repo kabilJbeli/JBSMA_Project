@@ -3,9 +3,7 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-
-                   xmlns:p="http://primefaces.org/ui">
-               
+                   xmlns:p="http://primefaces.org/ui">               
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -15,8 +13,8 @@
           <span aria-hidden="true"></span>
         </button>
       </div>
-    <div class="modal-body">
-    <h:form>
+       <h:form>
+    <div class="modal-body">   
 	<div class="form-group">
 	<div class="col-md-6">
 		<span style="padding-left:15px">Search by Name</span>
@@ -32,8 +30,8 @@
 		<h:outputLabel value="Tier List"
 		styleClass="text-left " style="padding-left:15px;" />
 						<div class="col-sm-12" style="padding-right: 0px;">						
-							<h:selectOneMenu readonly="#{CreationContrat.updateFindTier }" disabled="#{CreationContrat.updateFindTier}" id="selectTier" value="#{CreationContrat.selectedTierId}" styleClass="form-control" >
-								<f:selectItems  value="#{CreationContrat.searchedTier}" var="tier" itemValue="#{tier[1]}" itemLabel="#{tier[3]} #{tier[4]}"  />
+							<h:selectOneMenu  id="selectTier" value="#{CreationContrat.selectedTierId.CINTIER}" styleClass="form-control" >
+								<f:selectItems  value="#{CreationContrat.searchedTiers}" var="tier" itemValue="#{tier[2]}" itemLabel="#{tier[3]} #{tier[4]}"  />
 								<h:message for="selectTier" />
 							</h:selectOneMenu>
 	</div>
@@ -55,17 +53,16 @@
 	</div>
 	
 </div>
-</h:form>
+
 </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>        
+        <h:commandButton  value="Save changes" action="#{CreationContrat.updateSeletedTier()}" styleClass="btn btn-primary" >
+        <f:ajax  render="selectedTierForContract"  update="selectedTierForContract" />  
+        </h:commandButton>
         
-        <h:commandButton type="button" value="Save changes" action="#{CreationContrat.updateSeletedTier()}" styleClass="btn btn-primary" >
-    <f:ajax execute="@form" render="selectedTierForConntract"  update="selectedTierForConntract" />
-        <f:attribute  name="data-dismiss" value="modal" />
-    
-    </h:commandButton>
       </div>
+      </h:form>
     </div>
   </div>
 </div>

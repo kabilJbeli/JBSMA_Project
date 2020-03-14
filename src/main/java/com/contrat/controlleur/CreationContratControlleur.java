@@ -32,7 +32,7 @@ public class CreationContratControlleur {
 	ServiceContratLocal daocontrat;
 	@EJB
 	TierManagementLocal daotier;
-	public List<Tier> serachedTiers;
+	private List<Tier> searchedTiers;
     private Produit produit;
     private double Mtfinancement;
     private LocalDate DateEffet;
@@ -40,12 +40,11 @@ public class CreationContratControlleur {
     private LocalDate DateFin;
     private Tier tiers =  new Tier();
     private String tierInputValue;
-    private Integer selectedTierId;
-
-	public Integer getSelectedTierId() {
+    private Tier selectedTierId = new Tier();
+	public Tier getSelectedTierId() {
 		return selectedTierId;
 	}
-	public void setSelectedTierId(Integer selectedTierId) {
+	public void setSelectedTierId(Tier selectedTierId) {
 		this.selectedTierId = selectedTierId;
 	}
 	public Boolean getUpdateFindTier() {
@@ -62,9 +61,7 @@ public class CreationContratControlleur {
 	public void setTierCIN(Integer tierCIN) {
 		this.tierCIN = tierCIN;
 	}
-	private Integer tierCIN;
-    
-
+	private Integer tierCIN;  
 	public String getTierName() {
 		return tierName;
 	}
@@ -102,34 +99,22 @@ public class CreationContratControlleur {
 		this.tiers = tiers;
 	}
 	public List<Produit> getProduits() throws ParseException {
-//		Contrat contrat = new Contrat();
-//		contrat.setProduit(daoproduit.rechercheProduits().get(0));
-//		contrat.setDATEDEBUT(LocalDate.now());
-//		contrat.setTier(daotier.getAll().get(0));
-//		contrat.setMTFINANCEMENT(100000);
-//		contrat.setDUREE(240);
-//		contrat.setDATEDEBUT(LocalDate.now());
-//		daocontrat.CreationContrat(contrat);
 		return daoproduit.rechercheProduits();
-	}
-	
+	}	
 	public void getListTiersByName() {
 		if(!tierName.isEmpty()) {
 			this.updateFindTier = false;
-	this.serachedTiers = daotier.findByName(String.valueOf(tierName));
+	this.searchedTiers = daotier.findByName(String.valueOf(tierName));
 		}
 	}
-	
-	
 	public void getListTiersByCIN() {
 		if(tierCIN != null) {
 			this.updateFindTier = false;
-	this.serachedTiers = daotier.findByCIN(tierCIN);
+	this.searchedTiers = daotier.findByCIN(tierCIN);
 		}
-	}
-	
-	public List<Tier> getSearchedTier(){
-		return serachedTiers;
+	}	
+	public List<Tier> getSearchedTiers(){
+		return searchedTiers;
 	}
 	
 	public List<Tier> getListTiers() {
@@ -163,6 +148,7 @@ public class CreationContratControlleur {
 	}
 	public void CreationNouveauxContrat() throws ParseException {
 		Contrat contrat = new Contrat();
+		contrat.setTier(selectedTierId);
 		contrat.setDATEDEBUT(DateEffet);
 		contrat.setDATEFIN(DateFin);
 		contrat.setDATEECHEANCE(DateEcheance);
@@ -181,11 +167,9 @@ public class CreationContratControlleur {
 		this.tierInputValue =  tierInputValue;
 	}
 	public void updateSeletedTier() {
-		if(selectedTierId != null) {
-	this.tiers = (Tier) daotier.findByCIN(selectedTierId);
-		}
-		
+		if(this.selectedTierId != null) {
+	this.tiers = (Tier) daotier.findByCIN(selectedTierId.getCINTIER());
+		}		
 	}
-	
    
 }

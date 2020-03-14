@@ -58,7 +58,7 @@
 	<h:outputLabel value="Tier"	styleClass="text-left col-sm-2"  />
 						<div class="col-sm-10">
 						<div class="col-sm-11 no-gutters" style="padding:0px !important;">
-							<h:inputText id="selectedTierForConntract" readonly="true" disabled="true" value="#{CreationContrat.tiers.NAMETIER}"
+							<h:inputText id="selectedTierForContract" value="#{CreationContrat.tiers.NAMETIER}"
 								styleClass="form-control pull-left" disbaled="true" />
 						</div>								
 	<div class="col-sm-1" style="padding:0px;"><button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
@@ -83,7 +83,9 @@ Find tier
 							styleClass="text-left col-sm-2" />
 						<div class="col-sm-10">
 							<h:inputText  value="#{CreationContrat.dateEffet}"
-								styleClass="form-control" />
+								styleClass="form-control" >
+								<f:convertDateTime pattern = "dd-mm-yyyy" />								
+								</h:inputText>
 						</div>
 					</div>
 
@@ -92,7 +94,10 @@ Find tier
 							styleClass="text-left  col-sm-2" />
 						<div class="col-sm-10">
 							<h:inputText value="#{CreationContrat.dateFin}"
-								styleClass="form-control" />
+								styleClass="form-control" >
+								<f:convertDateTime pattern = "dd-mm-yyyy" />
+								
+								</h:inputText>
 						</div>
 					</div>
 					

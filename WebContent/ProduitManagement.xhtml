@@ -54,13 +54,7 @@
 			</h:inputText>    				
     		<h:outputText value="#{prod.TAUXCOMM} %" rendered="#{not prod.iseditable}" />
 									 </h:column>									 
-										<h:column styleClass="col">
-										<f:facet name="header">Taux TVA</f:facet>		
-									      #{ConfigurationProduit.setTauxcomm(prod.TAUXTVA)}			
-			<h:inputText  value="#{ConfigurationProduit.tauxtva}" rendered="#{prod.iseditable}"  style="padding:0px;" styleClass="form-control pull-left" >
-			</h:inputText>    				
-    		<h:outputText value="#{prod.TAUXTVA} %" rendered="#{not prod.iseditable}" />
-									 </h:column>
+							
 									<h:column>
 										<f:facet name="header">Supprimer</f:facet>
 											<h:commandButton value="Delete"

@@ -33,7 +33,6 @@ public class ConfigurationProduitControlleur implements Serializable {
 	private boolean Modified = false;
     private String description;
     private double tauxcomm;
-    private double tauxtva;
    private Boolean iseditable=false;
 
 	public Boolean getIseditable() {
@@ -42,12 +41,7 @@ public class ConfigurationProduitControlleur implements Serializable {
 public void setIseditable(Boolean iseditable) {
 	this.iseditable = iseditable;
 }
-	public double getTauxtva() {
-		return tauxtva;
-	}
-	public void setTauxtva(double tauxtva) {
-		this.tauxtva = tauxtva;
-	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -65,12 +59,11 @@ public void setIseditable(Boolean iseditable) {
 	}
 
 public void createProduct() {	
-	produit = new Produit();
-	produit.setTAUXTVA(tauxtva);
-	produit.setDESCRIPTION(description);
-	produit.setTAUXCOMM(tauxcomm);
-	produit.setIseditable(iseditable);
-	serviceProduit.Creation(produit);
+	Produit newProduct = new Produit();
+	newProduct.setDESCRIPTION(description);
+	newProduct.setTAUXCOMM(tauxcomm);
+	newProduct.setIseditable(iseditable);
+	serviceProduit.Creation(newProduct);
 }
 	public ConfProduitLocal getDaoproduit() {
 		return serviceProduit;
@@ -123,7 +116,6 @@ public void createProduct() {
 		serviceProduit.modifier(produit);		
 	}
 	public void modifierProduit (Produit produit) {
-		produit.setTAUXTVA(tauxtva);
 		produit.setDESCRIPTION(description);
 		produit.setTAUXCOMM(tauxcomm);
 		produit.setIseditable(false);
