@@ -27,12 +27,12 @@ import com.tier.dao.TierManagementLocal;
 @Stateless
 public class CreationContratControlleur {
 	@EJB
-	ConfProduitLocal daoproduit;
+	ConfProduitLocal serviceProduit;
 	@EJB
-	ServiceContratLocal daocontrat;
+	ServiceContratLocal serviceContrat;
 	@EJB
 	TierManagementLocal daotier;
-	private List<Tier> searchedTiers;
+	public List<Tier> serachedTiers;
     private Produit produit;
     private double Mtfinancement;
     private LocalDate DateEffet;
@@ -40,11 +40,12 @@ public class CreationContratControlleur {
     private LocalDate DateFin;
     private Tier tiers =  new Tier();
     private String tierInputValue;
-    private Tier selectedTierId = new Tier();
-	public Tier getSelectedTierId() {
+    private Integer selectedTierId;
+
+	public Integer getSelectedTierId() {
 		return selectedTierId;
 	}
-	public void setSelectedTierId(Tier selectedTierId) {
+	public void setSelectedTierId(Integer selectedTierId) {
 		this.selectedTierId = selectedTierId;
 	}
 	public Boolean getUpdateFindTier() {
@@ -61,7 +62,9 @@ public class CreationContratControlleur {
 	public void setTierCIN(Integer tierCIN) {
 		this.tierCIN = tierCIN;
 	}
-	private Integer tierCIN;  
+	private Integer tierCIN;
+    
+
 	public String getTierName() {
 		return tierName;
 	}
@@ -69,10 +72,10 @@ public class CreationContratControlleur {
 		this.tierName = tierName;
 	}
 	public ConfProduitLocal getDaoproduit() {
-		return daoproduit;
+		return serviceProduit;
 	}
 	public void setDaoproduit(ConfProduitLocal daoproduit) {
-		this.daoproduit = daoproduit;
+		this.serviceProduit = daoproduit;
 	}
     public TierManagementLocal getDaotier() {
 		return daotier;
@@ -81,10 +84,10 @@ public class CreationContratControlleur {
 		this.daotier = daotier;
 	}
 	public ServiceContratLocal getDaocontrat() {
-		return daocontrat;
+		return serviceContrat;
 	}
 	public void setDaocontrat(ServiceContratLocal daocontrat) {
-		this.daocontrat = daocontrat;
+		this.serviceContrat = daocontrat;
 	}
 	public Produit getProduit() {
 		return produit;
@@ -99,22 +102,34 @@ public class CreationContratControlleur {
 		this.tiers = tiers;
 	}
 	public List<Produit> getProduits() throws ParseException {
-		return daoproduit.rechercheProduits();
-	}	
+//		Contrat contrat = new Contrat();
+//		contrat.setProduit(daoproduit.rechercheProduits().get(0));
+//		contrat.setDATEDEBUT(LocalDate.now());
+//		contrat.setTier(daotier.getAll().get(0));
+//		contrat.setMTFINANCEMENT(100000);
+//		contrat.setDUREE(240);
+//		contrat.setDATEDEBUT(LocalDate.now());
+//		daocontrat.CreationContrat(contrat);
+		return serviceProduit.rechercheProduits();
+	}
+	
 	public void getListTiersByName() {
 		if(!tierName.isEmpty()) {
 			this.updateFindTier = false;
-	this.searchedTiers = daotier.findByName(String.valueOf(tierName));
+	this.serachedTiers = daotier.findByName(String.valueOf(tierName));
 		}
 	}
+	
+	
 	public void getListTiersByCIN() {
 		if(tierCIN != null) {
 			this.updateFindTier = false;
-	this.searchedTiers = daotier.findByCIN(tierCIN);
+	this.serachedTiers = daotier.findByCIN(tierCIN);
 		}
-	}	
-	public List<Tier> getSearchedTiers(){
-		return searchedTiers;
+	}
+	
+	public List<Tier> getSearchedTier(){
+		return serachedTiers;
 	}
 	
 	public List<Tier> getListTiers() {
@@ -148,13 +163,12 @@ public class CreationContratControlleur {
 	}
 	public void CreationNouveauxContrat() throws ParseException {
 		Contrat contrat = new Contrat();
-		contrat.setTier(selectedTierId);
 		contrat.setDATEDEBUT(DateEffet);
 		contrat.setDATEFIN(DateFin);
 		contrat.setDATEECHEANCE(DateEcheance);
 		contrat.setMTFINANCEMENT(Mtfinancement);
 		try {
-			daocontrat.CreationContrat(contrat);
+			serviceContrat.CreationContrat(contrat);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -167,9 +181,11 @@ public class CreationContratControlleur {
 		this.tierInputValue =  tierInputValue;
 	}
 	public void updateSeletedTier() {
-		if(this.selectedTierId != null) {
-	this.tiers = (Tier) daotier.findByCIN(selectedTierId.getCINTIER());
-		}		
+		if(selectedTierId != null) {
+	this.tiers = (Tier) daotier.findByCIN(selectedTierId);
+		}
+		
 	}
+	
    
 }
