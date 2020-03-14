@@ -19,9 +19,9 @@ public class EncaissementFactureController {
 	ServiceFactureLocal ServiceFacture;
 	@EJB
 	ServiceContratLocal serviceContrat;
-	List<Facture> factures;
-	Facture facture;
-	String numeroContrat;
+	private List<Facture> factures;
+	private List<Facture> facture;
+	private String numeroContrat;
 
 	public ServiceFactureLocal getServiceFacture() {
 		return ServiceFacture;
@@ -39,11 +39,11 @@ public class EncaissementFactureController {
 		this.factures = factures;
 	}
 
-	public Facture getFacture() {
+	public List<Facture> getFacture() {
 		return facture;
 	}
 
-	public void setFacture(Facture facture) {
+	public void setFacture(List<Facture> facture) {
 		this.facture = facture;
 	}
 
@@ -57,8 +57,8 @@ public class EncaissementFactureController {
 
 	public List<Facture> getListFactureByContrat() {
 		if (!numeroContrat.equals("")) {
-			ServiceFacture.RechercheFactureparContract(serviceContrat.RechercheContratParNumero(numeroContrat));
-		return factures;
+		this.factures =	ServiceFacture.RechercheFactureparContract(serviceContrat.RechercheContratParNumero(numeroContrat));
+		return this.factures;
 		}
 		return null;
 	}

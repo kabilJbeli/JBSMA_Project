@@ -1,5 +1,7 @@
 package com.contrat.dao;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import com.contrat.entities.Contrat;
@@ -10,5 +12,5 @@ public interface ContratManagementLocal {
 	public void update(Contrat c);
 	public Contrat findByName(String name);
 	public void creation (Contrat c);
-
+	public List<Contrat> contractList();
 }

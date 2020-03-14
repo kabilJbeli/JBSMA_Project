@@ -1,5 +1,7 @@
 package com.contrat.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.SessionContext;
@@ -12,6 +14,7 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 import com.contrat.entities.Contrat;
+import com.tier.entities.Tier;
 
 /**
  * Session Bean implementation class ContratManagement
@@ -113,5 +116,12 @@ public class ContratManagement implements ContratManagementLocal {
 
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
+	}
+
+	@Override
+	public List<Contrat> contractList() {
+		// TODO Auto-generated method stub
+		Query query = getEntityManager().createNativeQuery("select * from contrat", Contrat.class);
+		return query.getResultList();
 	}
 }

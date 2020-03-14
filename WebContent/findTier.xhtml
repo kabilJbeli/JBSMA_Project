@@ -30,8 +30,8 @@
 		<h:outputLabel value="Tier List"
 		styleClass="text-left " style="padding-left:15px;" />
 						<div class="col-sm-12" style="padding-right: 0px;">						
-							<h:selectOneMenu  id="selectTier" value="#{CreationContrat.selectedTierId.CINTIER}" styleClass="form-control" >
-								<f:selectItems  value="#{CreationContrat.searchedTiers}" var="tier" itemValue="#{tier[2]}" itemLabel="#{tier[3]} #{tier[4]}"  />
+							<h:selectOneMenu  id="selectTier" value="#{CreationContrat.selectedTierId}" styleClass="form-control" >
+								<f:selectItems  value="#{CreationContrat.searchedTier}" var="tier" itemValue="#{tier[2]}" itemLabel="#{tier[3]} #{tier[4]}"  />
 								<h:message for="selectTier" />
 							</h:selectOneMenu>
 	</div>

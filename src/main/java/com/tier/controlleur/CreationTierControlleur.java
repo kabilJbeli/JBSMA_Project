@@ -78,6 +78,10 @@ public class CreationTierControlleur {
 		tier.setPRENOMTIER(PRENOMTIER);	
 		tier.setIseditable(false);
 		daotier.creation(tier);
+		this.ADRESSETIER=null;
+		this.CINTIER=null;
+		this.NAMETIER=null;
+		this.PRENOMTIER=null;
 	}
     
 	public void setEditable(Tier tier) {

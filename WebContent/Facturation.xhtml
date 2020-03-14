@@ -48,12 +48,12 @@
 		<div class="row">
 		<h:form>
 			<div class="col-xs-12 col-xs-updated">
-				<h:inputText id="tierInputValue" value="#{Facturation.numeroContrat}"
+				<h:inputText id="tierInputValue" placeholder="Please write the contract number" value="#{Facturation.numeroContrat}"
 					styleClass="form-control" />
 			</div>
-			<div class="col-md-1" style="padding: 0px;">
+			<div class="col-md-1"  style="padding:15px;">
 				<h:commandButton value="Recherche facture"
-					action="#{CreationContrat.getListFactureByContrat()}"
+					action="#{Facturation.getListFactureByContrat()}"
 					styleClass="btn btn-danger">
 					<f:ajax execute="@form" render="lesfactures" update="lesfactures" />
 				</h:commandButton>
@@ -63,6 +63,27 @@
 				<div class="col-sm-12">
 					<h:dataTable id="lesfactures" styleClass="table" value="#{Facturation.factures}"
 						var="fact">
+							<h:column styleClass="col">
+										<f:facet name="header">ID</f:facet>					
+					
+    		<h:outputText value="#{fact.IDFACTURE}"  />
+									 </h:column>
+									 
+									 			<h:column styleClass="col">
+										<f:facet name="header">Description</f:facet>					
+					
+   		<h:outputText value="#{fact.DESCRIPTION}"  />
+   											 </h:column>
+								
+								
+								 			<h:column styleClass="col">
+										<f:facet name="header">Status</f:facet>					
+					
+    		                		<h:outputText value="#{fact.status}"  />
+
+									 </h:column>
+						
+						
 					</h:dataTable>
 				</div>
 			</div>

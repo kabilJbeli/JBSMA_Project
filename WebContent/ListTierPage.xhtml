@@ -91,18 +91,18 @@ tbody td {
    
    <h:column>
       <f:facet name = "header">Delete</f:facet>
-		<h:commandButton value="Delete" action="#{CreationTier.deleteTier(tier)}" styleClass="btn btn-default" />
+		<h:commandButton value="Delete"  action="#{CreationTier.deleteTier(tier)}" styleClass="btn btn-danger" />
    </h:column>
    
       <h:column>
       <f:facet name = "header">Update</f:facet>
-	<h:commandLink value="Edit" action="#{CreationTier.setEditable(tier)}" rendered="#{not tier.iseditable}" >
+	<h:commandButton styleClass="btn btn-default" value="Edit" action="#{CreationTier.setEditable(tier)}" rendered="#{not tier.iseditable}" >
 	
 	<f:ajax execute="@form" render="@form" />
 	
-	</h:commandLink>
+	</h:commandButton>
 	
-	<h:commandButton value="Update" action="#{CreationTier.updateTier(tier)}" rendered="#{tier.iseditable}" />
+	<h:commandButton value="Update" action="#{CreationTier.updateTier(tier)}"  styleClass="btn btn-danger" rendered="#{tier.iseditable}" />
 	
    </h:column>
 </h:dataTable>
