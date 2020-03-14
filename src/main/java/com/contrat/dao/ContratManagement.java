@@ -124,4 +124,24 @@ public class ContratManagement implements ContratManagementLocal {
 		Query query = getEntityManager().createNativeQuery("select * from contrat", Contrat.class);
 		return query.getResultList();
 	}
+	
+		@Override
+	public BigInteger getNext() {
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();
+	    Query query =  getEntityManager().createNativeQuery("select max(next_val)+1 as num from hibernate_sequence");
+	    BigInteger nextval = (BigInteger) query.getSingleResult();
+	    userTxn.commit();
+	    return nextval;
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return BigInteger.valueOf(0);
+	}
 }

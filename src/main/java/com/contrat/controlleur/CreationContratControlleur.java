@@ -105,6 +105,20 @@ public class CreationContratControlleur {
 		this.tiers = tiers;
 	}
 	public List<Produit> getProduits() throws ParseException {
+		Contrat contrat = new Contrat();
+		contrat.setProduit(serviceProduit.rechercheProduits().get(0));
+		contrat.setDATEDEBUT(LocalDate.now());
+		contrat.setTier(daotier.getAll().get(0));
+		contrat.setMTFINANCEMENT(100000);
+		contrat.setDUREE(240);
+		contrat.setDATEDEBUT(LocalDate.now());
+		if (numeroContrat == null) {
+			if (numeroContrat.equals("")) {
+				numeroContrat = LocalDate.now().toString()+tiers.getNAMETIER()+serviceContrat.getNext();
+			}
+			}
+		contrat.setNUMEROCONTRAT(numeroContrat);
+		serviceContrat.CreationContrat(contrat);
 		return serviceProduit.rechercheProduits();
 	}
 	
