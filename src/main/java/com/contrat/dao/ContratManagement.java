@@ -79,7 +79,7 @@ public class ContratManagement implements ContratManagementLocal {
 			userTxn.begin();
 			Query query = getEntityManager()
 					.createNativeQuery("select * from contrat where NUMEROCONTRAT = ?", Contrat.class)
-					.setParameter("NUMEROCONTRAT", name);
+					.setParameter(1, name);
 			Contrat contrat =  (Contrat) query.getSingleResult();
 			userTxn.commit();
 			return contrat;

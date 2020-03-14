@@ -62,8 +62,8 @@ public class EncaissementFactureController {
 
 	public List<Facture> getListFactureByContrat() {
 		if (!numeroContrat.equals("")) {
-			ServiceFacture.RechercheFactureparContract(serviceContrat.RechercheContratParNumero(numeroContrat));
-		return factures;
+			setFactures(ServiceFacture.RechercheFactureparContract(serviceContrat.RechercheContratParNumero(numeroContrat)));
+		return getFactures();
 		}
 		return null;
 	}
