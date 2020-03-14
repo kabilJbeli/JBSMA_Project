@@ -45,6 +45,7 @@ public class CreationContratControlleur {
     private String tierInputValue;
     private Tier selectedTierId;
     private EncaissementFactureController Facture = new EncaissementFactureController();
+    private String numeroContrat;
 	public Tier getSelectedTierId() {
 		return selectedTierId;
 	}
@@ -105,20 +106,18 @@ public class CreationContratControlleur {
 		this.tiers = tiers;
 	}
 	public List<Produit> getProduits() throws ParseException {
-		Contrat contrat = new Contrat();
-		contrat.setProduit(serviceProduit.rechercheProduits().get(0));
-		contrat.setDATEDEBUT(LocalDate.now());
-		contrat.setTier(daotier.getAll().get(0));
-		contrat.setMTFINANCEMENT(100000);
-		contrat.setDUREE(240);
-		contrat.setDATEDEBUT(LocalDate.now());
-		if (numeroContrat == null) {
-			if (numeroContrat.equals("")) {
-				numeroContrat = LocalDate.now().toString()+tiers.getNAMETIER()+serviceContrat.getNext();
-			}
-			}
-		contrat.setNUMEROCONTRAT(numeroContrat);
-		serviceContrat.CreationContrat(contrat);
+//		Contrat contrat = new Contrat();
+//		contrat.setProduit(serviceProduit.rechercheProduits().get(0));
+//		contrat.setDATEDEBUT(LocalDate.now());
+//		contrat.setTier(daotier.getAll().get(0));
+//		contrat.setMTFINANCEMENT(100000);
+//		contrat.setDUREE(240);
+//		contrat.setDATEDEBUT(LocalDate.now());
+//		if (numeroContrat == null) {
+//				numeroContrat = LocalDate.now().toString()+tiers.getNAMETIER()+serviceContrat.getNext();
+//			}
+//		contrat.setNUMEROCONTRAT(numeroContrat);
+//		serviceContrat.CreationContrat(contrat);
 		return serviceProduit.rechercheProduits();
 	}
 	
@@ -202,6 +201,12 @@ public class CreationContratControlleur {
 	}
 	public void updateFactureContractNumber(Contrat con) {
 		Facture.setNumeroContrat(con.getNUMEROCONTRAT());		
+	}
+	public String getNumeroContrat() {
+		return numeroContrat;
+	}
+	public void setNumeroContrat(String numeroContrat) {
+		this.numeroContrat = numeroContrat;
 	}
 	
    

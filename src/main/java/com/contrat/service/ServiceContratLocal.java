@@ -1,5 +1,6 @@
 package com.contrat.service;
 
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface ServiceContratLocal {
 	 public double CalculeMontantTotale (List<Echeance> echeances);
 	 public Contrat RechercheContratParNumero (String NumeroContrat);
 	 public double calculeMontantInterets(List<Echeance> echeances);
+	 public BigInteger getNext();
 }

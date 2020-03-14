@@ -1,5 +1,6 @@
 package com.contrat.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.annotation.Resource;
