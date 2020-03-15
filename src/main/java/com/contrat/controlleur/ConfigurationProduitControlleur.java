@@ -64,6 +64,8 @@ public void createProduct() {
 	newProduct.setTAUXCOMM(tauxcomm);
 	newProduct.setIseditable(iseditable);
 	serviceProduit.Creation(newProduct);
+	this.description="";
+	this.tauxcomm=0.0;	
 }
 	public ConfProduitLocal getDaoproduit() {
 		return serviceProduit;
@@ -119,7 +121,7 @@ public void createProduct() {
 		produit.setDESCRIPTION(description);
 		produit.setTAUXCOMM(tauxcomm);
 		produit.setIseditable(false);
-		serviceProduit.modifier(produit);
+		serviceProduit.modifier(produit);	
 	}
 	
 	public void delete(Produit produit) {

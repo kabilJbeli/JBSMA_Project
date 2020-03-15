@@ -126,7 +126,7 @@ public class TierManagement implements TierManagementLocal {
 		try {
 			userTxn.begin();			
 			Query query = getEntityManager().createNativeQuery("select * from Tier where CINTIER=?").setParameter(1, CIN);
-			tier = query.getResultList();
+		tier = query.getResultList();
 			userTxn.commit();			
 		} catch (Throwable e) {
 			e.printStackTrace();

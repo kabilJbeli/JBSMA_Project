@@ -6,8 +6,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
+import javax.ejb.EJB;
 import javax.persistence.*;
 
+import com.tier.dao.TierManagementLocal;
 import com.tier.entities.Tier;
 
 /**
@@ -36,12 +38,16 @@ public class Contrat implements Serializable {
 	@OneToOne
 	private Tier tier;
 	
+	
+	
 	public Tier getTier() {
 		return tier;
 	}
-
+	public void setTierByCin(Tier T) {
+	        this.tier = T;
+	}
 	public void setTier(Tier tier) {
-		this.tier = tier;
+			this.tier = tier;
 	}
 
 	@OneToMany(cascade = { CascadeType.PERSIST },mappedBy="contrat")
