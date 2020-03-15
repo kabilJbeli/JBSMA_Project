@@ -8,6 +8,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -102,10 +104,12 @@ public class ConfProduit implements ConfProduitLocal {
 		UserTransaction userTxn = sessionContext.getUserTransaction();
 		try {
 			userTxn.begin();
-			getEntityManager().remove(getEntityManager().find(Produit.class, produit.getIDCONF()));
+			getEntityManager().remove(getEntityManager().find(Produit.class, produit.getIDCONF()));			
 			userTxn.commit();
+			FacesContext.getCurrentInstance().addMessage("productManagement", new FacesMessage("The product has been deleted"));
 		} catch (Throwable e) {
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage("productManagement", new FacesMessage("This product is attached to a contract is should not be deleted"));
 			try {
 				userTxn.rollback();
 			} catch (IllegalStateException | SecurityException | SystemException e1) {
