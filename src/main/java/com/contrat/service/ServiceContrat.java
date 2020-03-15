@@ -114,5 +114,11 @@ public class ServiceContrat implements ServiceContratLocal {
 		// TODO Auto-generated method stub
 		return daoContrat.getNext();
 	}
+	
+	@Override
+	public List<Contrat> ToutContrat (){
+		List<Contrat>  contrats = daoContrat.contractList();
+		return contrats;
+	}
 
 }

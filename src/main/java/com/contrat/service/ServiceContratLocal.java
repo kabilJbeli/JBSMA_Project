@@ -18,4 +18,5 @@ public interface ServiceContratLocal {
 	 public Contrat RechercheContratParNumero (String NumeroContrat);
 	 public double calculeMontantInterets(List<Echeance> echeances);
 	 public BigInteger getNext();
+	 public List<Contrat> ToutContrat();
 }

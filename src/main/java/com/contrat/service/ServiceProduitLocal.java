@@ -14,6 +14,7 @@ public interface ServiceProduitLocal {
 	public void RechercheProduit(int IdProduit);
 	public List<Produit> rechercheProduits();
 	public void Modifier (Produit produit);
+	public boolean ProduitRatacheContrat (Produit produit);
 	
 
 

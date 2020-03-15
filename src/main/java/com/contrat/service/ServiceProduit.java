@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.contrat.dao.ConfProduitLocal;
+import com.contrat.entities.Contrat;
 import com.contrat.entities.Echeance;
 import com.contrat.entities.Produit;
 
@@ -18,6 +19,8 @@ import com.contrat.entities.Produit;
 public class ServiceProduit implements ServiceProduitLocal {
 	@EJB
 	ConfProduitLocal daoproduit;
+	@EJB
+	ServiceContratLocal daocontrat;
 
     /**
      * Default constructor. 
@@ -50,6 +53,20 @@ public class ServiceProduit implements ServiceProduitLocal {
 	public void Modifier(Produit produit) {
 		daoproduit.modifier(produit);
 		
+	}
+	
+	@Override
+	public boolean ProduitRatacheContrat (Produit produit) {
+		List<Contrat> contrats = daocontrat.ToutContrat();
+		boolean trouve = false;
+		for (int i= 0; i<contrats.size(); i++) {
+			if (contrats.get(i).getProduit()==produit) {
+				trouve = true;
+				break;
+				
+			}
+		}
+		return trouve;
 	}
 
 }

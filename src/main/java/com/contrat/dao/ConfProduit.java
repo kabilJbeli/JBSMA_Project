@@ -13,6 +13,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+
+import com.contrat.entities.Contrat;
 import com.contrat.entities.Produit;
 
 /**
@@ -128,5 +130,5 @@ public class ConfProduit implements ConfProduitLocal {
 			}
 		}
 	}
-
+	
 }

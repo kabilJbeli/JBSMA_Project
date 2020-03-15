@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Alternative;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -27,7 +28,7 @@ public class ConfigurationProduitControlleur implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@EJB
-	private ConfProduitLocal serviceProduit;
+	private ServiceProduitLocal serviceProduit;
 	private Produit produit;
 	private List<Produit> produits;
 	private boolean Modified = false;
@@ -67,12 +68,12 @@ public void createProduct() {
 	this.description="";
 	this.tauxcomm=0.0;	
 }
-	public ConfProduitLocal getDaoproduit() {
+	public ServiceProduitLocal getDaoproduit() {
 		return serviceProduit;
 	}
 
 
-	public void setDaoproduit(ConfProduitLocal daoproduit) {
+	public void setDaoproduit(ServiceProduitLocal daoproduit) {
 		this.serviceProduit = daoproduit;
 	}
 
@@ -115,17 +116,22 @@ public void createProduct() {
 	
 	public void setProductEditable(Produit produit) {
 		produit.setIseditable(true);
-		serviceProduit.modifier(produit);		
+		serviceProduit.Modifier(produit);		
 	}
 	public void modifierProduit (Produit produit) {
 		produit.setDESCRIPTION(description);
 		produit.setTAUXCOMM(tauxcomm);
 		produit.setIseditable(false);
-		serviceProduit.modifier(produit);	
+		serviceProduit.Modifier(produit);	
 	}
 	
 	public void delete(Produit produit) {
-		serviceProduit.delete(produit);
+		if (serviceProduit.ProduitRatacheContrat(produit)) {
+			serviceProduit.Delete(produit);
+		}
+		else {
+			FacesContext.getCurrentInstance().addMessage("ConfigurationProduit", new FacesMessage("This product is attached to a contract is should not be deleted"));
+		}
 	}
 
 }
