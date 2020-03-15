@@ -40,7 +40,7 @@
 					<h:form id="consultContract" styleClass="form-horizontal">
 						<div class="form-group">
 							<div class="col-sm-12">
-								<h:dataTable styleClass="table"
+								<h:dataTable styleClass="table" id="consultTable" rendered="#{not CreationContrat.showEcheancePanel}"
 									value="#{CreationContrat.allContratList}" var="con">
 									<h:column styleClass="col">
 										<f:facet name="header">Numero contrat</f:facet>
@@ -60,8 +60,8 @@
 										<h:commandButton
 											action="#{CreationContrat.updateSelectedContractId(con)}"
 											styleClass="btn btn-default" value="Echeances"
-											execute="@form" render=":consultContract:echeanceList"
-											update=":consultContract:echeanceList">
+											execute="@form" render=":consultContract:echeanceList;:consultContract:consultTable"
+											update=":consultContract:echeanceList;:consultContract:consultTable">
 
 										</h:commandButton>
 									</h:column>
@@ -69,42 +69,53 @@
 
 							</div>
 						</div>
+							<h:commandButton rendered="#{CreationContrat.showEcheancePanel}"
+											action="#{CreationContrat.setShowEcheancePanel(false)}"
+											styleClass="btn btn-danger" value="Back"
+											execute="@form" render=":consultContract:echeanceList;:consultContract:consultTable"
+											update=":consultContract:echeanceList;:consultContract:consultTable">
+
+										</h:commandButton>
 						<h:dataTable styleClass="table" id="echeanceList"
 							rendered="#{CreationContrat.showEcheancePanel}"
-							value="#{CreationContrat.echeanceListForSelectContract}"
+							value="#{CreationContrat.getEcheanceListForSelectContract()}"
 							var="con">
 							<h:column styleClass="col">
 								<f:facet name="header">NUMERO CONTRAT</f:facet>
+										<h:outputText value="#{con[6]}" />
 
-								#{con.IDCONTRAT.NUMEROCONTRAT}
+								
 							</h:column>
 							<h:column styleClass="col">
 								<f:facet name="header">Echeance  ID</f:facet>
+										<h:outputText value="#{con[0]}" />
 
-								#{con.IDECHEANCE}"
+								
 							</h:column>
 							<h:column styleClass="col">
 								<f:facet name="header">DATE Exigibilite</f:facet>
-
-								#{con.DATEEXIGIBILITE}
+<h:outputText value="#{con[2]}" />
 							</h:column>
 
 							<h:column styleClass="col">
 								<f:facet name="header">Date Echeance</f:facet>
+<h:outputText value="#{con[1]}" />
 
-							   #{con.DATEECHEANCE}
+							   
 							</h:column>
 
 							<h:column styleClass="col">
 								<f:facet name="header">Montant d'interet</f:facet>
+<h:outputText value="#{con[3]}" />
 
-								#{con.MTTCOMM}
+								
 
 							</h:column>
 							<h:column styleClass="col">
 								<f:facet name="header">Montant totale</f:facet>
+<h:outputText value="#{con[4]}" />
 
-								#{con.MTTTC}"
+								
 
 							</h:column>
 						</h:dataTable>

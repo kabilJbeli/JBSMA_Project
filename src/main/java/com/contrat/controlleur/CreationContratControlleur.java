@@ -253,7 +253,7 @@ public class CreationContratControlleur {
 		if(con != null) {
 		this.updateSelectedContract = con.getIDCONTRAT();	
 		this.setShowEcheancePanel(true);
-		setEcheanceListForSelectContract(daoEcheance.RechercheEcheanceparDateContrat(con));
+		this.setEcheanceListForSelectContract(daoEcheance.RechercheEcheanceparDateContrat(con));
 		}
 	}
 	public List<Echeance> getEcheanceListForSelectContract() {
