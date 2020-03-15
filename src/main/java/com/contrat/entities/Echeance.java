@@ -24,7 +24,15 @@ public class Echeance implements Serializable {
 	private double MTTCOMM;
 	@ManyToOne
 	private Contrat contrat;
+    public int getStatus() {
+		return Status;
+	}
 
+	public void setStatus(int status) {
+		Status = status;
+	}
+
+	private int Status;
 	private static final long serialVersionUID = 1L;
 
 	public double getMTTCOMM() {

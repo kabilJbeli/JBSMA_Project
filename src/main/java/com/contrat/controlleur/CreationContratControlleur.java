@@ -14,6 +14,8 @@ import javax.faces.context.FacesContext;
 
 import com.comptabilite.dao.EncaissementManagementLocal;
 import com.comptabilite.entities.Encaissement;
+import com.comptabilite.entities.Facture;
+import com.comptabilite.service.ServiceFactureLocal;
 import com.contrat.dao.ConfProduitLocal;
 import com.contrat.dao.ContratManagementLocal;
 import com.contrat.dao.EchanceManagementLocal;
@@ -44,6 +46,8 @@ public class CreationContratControlleur {
 	ContratManagementLocal daoContrat;
 	@EJB
 	EchanceManagementLocal daoEcheance;
+	@EJB 
+	ServiceFactureLocal daoFacture;
 	public List<Tier> searchedTiers;
     private Produit produit;
     private int idProduit;
@@ -261,6 +265,17 @@ public class CreationContratControlleur {
 	}
 	public void setEcheanceListForSelectContract(List<Echeance> echeanceListForSelectContract) {
 		this.echeanceListForSelectContract = echeanceListForSelectContract;
+	}
+	public void createFacture(Echeance E) {
+		Facture facture = new Facture();
+		facture.setDATEEFFET(E.getDATEECHEANCE());
+		facture.setECHEANCE(E);
+		facture.setMTCOM(E.getMTTCOMM());
+		facture.setMTTTC(E.getMTTTC());
+		facture.setStatus(0);
+		E.setStatus(1);
+		daoEcheance.Modify(E);
+		daoFacture.CreationFacture(facture);
 	}
 
 }

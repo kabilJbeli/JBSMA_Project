@@ -118,6 +118,23 @@
 								
 
 							</h:column>
+							
+							
+							<h:column styleClass="col">
+								<f:facet name="header" style="text-align:center;">Status</f:facet>
+									<h:panelGroup rendered="#{con[5] == 0}">
+									<h:commandButton 
+											action="#{CreationContrat.createFacture(con)}"
+											styleClass="btn btn-danger" value="Generate Facture"
+										excute="@this"	/>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{con[5] == 1}">
+								Facture Generated
+								</h:panelGroup>
+
+							</h:column>
+							
+							
 						</h:dataTable>
 					</h:form>
 

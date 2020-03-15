@@ -41,8 +41,8 @@ public class EchanceManagement implements EchanceManagementLocal {
 
 	@Override
 	public void creation(Echeance echance) {
-		entityManager.persist(echance);
-		
+		echance.setStatus(0);
+		entityManager.persist(echance);		
 	}
 
 	public EntityManager getEntityManager() {
@@ -72,6 +72,24 @@ public class EchanceManagement implements EchanceManagementLocal {
 			}
 		}
 		return tier;
+	}
+
+	@Override
+	public void Modify(Echeance c) {
+		// TODO Auto-generated method stub
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();
+			getEntityManager().merge(c);
+			userTxn.commit();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 	
 
