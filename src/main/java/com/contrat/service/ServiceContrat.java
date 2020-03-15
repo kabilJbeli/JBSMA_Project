@@ -1,5 +1,6 @@
 package com.contrat.service;
 
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -107,5 +108,11 @@ public class ServiceContrat implements ServiceContratLocal {
     public Contrat RechercheContratParNumero (String NumeroContrat) {
     	return daoContrat.findByName(NumeroContrat);
     }
+
+	@Override
+	public BigInteger getNext() {
+		// TODO Auto-generated method stub
+		return daoContrat.getNext();
+	}
 
 }

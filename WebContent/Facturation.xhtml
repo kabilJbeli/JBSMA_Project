@@ -25,7 +25,7 @@
 	<h:outputStylesheet library="css" name="style.css" />
 	<h:outputScript library="js" name="jquery-3.4.1.min.js" target="head" />
 	<h:outputScript library="js" name="bootstrap.min.js" target="head" />
-	<title>Configuration des produits</title>
+	<title>Facturation</title>
 	<style>
 .form-group {
 	margin-bottom: 15px;
@@ -46,47 +46,57 @@
 	</div>
 	<div class="container">
 		<div class="row">
-		<h:form>
-			<div class="col-xs-12 col-xs-updated">
-				<h:inputText id="tierInputValue" placeholder="Please write the contract number" value="#{Facturation.numeroContrat}"
-					styleClass="form-control" />
-			</div>
-			<div class="col-md-1"  style="padding:15px;">
-				<h:commandButton value="Recherche facture"
-					action="#{Facturation.getListFactureByContrat()}"
-					styleClass="btn btn-danger">
-					<f:ajax execute="@form" render="lesfactures" update="lesfactures" />
-				</h:commandButton>
-			</div>
-			<f:attribute name="data-dismiss" value="modal" />
-			<div class="form-group">
-				<div class="col-sm-12">
-					<h:dataTable id="lesfactures" styleClass="table" value="#{Facturation.factures}"
-						var="fact">
-							<h:column styleClass="col">
-										<f:facet name="header">ID</f:facet>					
-					
-    		<h:outputText value="#{fact.IDFACTURE}"  />
-									 </h:column>
-									 
-									 			<h:column styleClass="col">
-										<f:facet name="header">Description</f:facet>					
-					
-   		<h:outputText value="#{fact.DESCRIPTION}"  />
-   											 </h:column>
-								
-								
-								 			<h:column styleClass="col">
-										<f:facet name="header">Status</f:facet>					
-					
-    		                		<h:outputText value="#{fact.status}"  />
-
-									 </h:column>
-						
-						
-					</h:dataTable>
+			<h:form>
+				<div class="col-xs-12 col-xs-updated">
+					<h:inputText id="tierInputValue"
+						value="#{Facturation.numeroContrat}" styleClass="form-control" />
+					<h:commandButton value="Recherche facture"
+						action="#{Facturation.getListFactureByContrat()}"
+						styleClass="btn btn-danger">
+						<f:ajax execute="@form" render="lesfactures" update="lesfactures" />
+					</h:commandButton>
 				</div>
-			</div>
+				<f:attribute name="data-dismiss" value="modal" />
+				<div class="form-group">
+					<div class="col-sm-12">
+						<h:dataTable id="lesfactures" styleClass="table"
+							value="#{Facturation.factures}" var="fact">
+							<h:column styleClass="col">
+								<f:facet name="header">Description</f:facet>		
+									      #{fact.DESCRIPTION}
+						</h:column>
+							<h:column styleClass="col">
+								<f:facet name="header">Montant totale</f:facet>		
+									      #{fact.MTTTC}
+						</h:column>
+							<h:column styleClass="col">
+								<f:facet name="header">Montant d'intérêt</f:facet>		
+									      #{fact.MTTTC}
+						</h:column>
+							<h:column styleClass="col">
+								<f:facet name="header">Status</f:facet>
+								<h:panelGroup rendered="#{fact.status == 0}">
+								<h:outputLabel value="impayé" />
+								</h:panelGroup>
+								<h:panelGroup rendered="#{fact.status == 1}">
+								Encaissé
+								</h:panelGroup>
+								<h:panelGroup rendered="#{fact.status == 2}">
+								Annulé
+								</h:panelGroup>
+							</h:column>
+							<h:column styleClass="col">
+								<f:facet name="header">Operation</f:facet>
+								<h:panelGroup rendered="#{fact.status == 0}">
+									<h:commandButton value="Encaissement"
+										styleClass="btn btn-default"
+										actionListener="#{Facturation.encaisseFacture(facture)}"
+										process="@this" />
+								</h:panelGroup>
+							</h:column>
+						</h:dataTable>
+					</div>
+				</div>
 			</h:form>
 		</div>
 	</div>

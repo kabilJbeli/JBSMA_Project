@@ -1,5 +1,6 @@
 package com.contrat.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -13,4 +14,5 @@ public interface ContratManagementLocal {
 	public Contrat findByName(String name);
 	public void creation (Contrat c);
 	public List<Contrat> contractList();
+	public BigInteger getNext();
 }
