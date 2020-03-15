@@ -12,6 +12,6 @@ import com.contrat.entities.Echeance;
 @Local
 public interface EchanceManagementLocal {
 	public void creation (Echeance c);
-	public List<Echeance> RechercheEcheanceparDateContrat(Contrat contrat, LocalDate datemin, LocalDate datemax);
+	public List<Echeance> RechercheEcheanceparDateContrat(Contrat contrat);
 
 }
