@@ -54,15 +54,13 @@ public class EchanceManagement implements EchanceManagementLocal {
 	}
 	
 	@Override
-	public List<Echeance> RechercheEcheanceparDateContrat(Contrat contrat, LocalDate datemin, LocalDate datemax) {
+	public List<Echeance> RechercheEcheanceparDateContrat(Contrat contrat) {
 		List<Echeance> tier = null;
 		UserTransaction userTxn = sessionContext.getUserTransaction();
 		try {
 			userTxn.begin();			
-			Query query = getEntityManager().createNativeQuery("select * from echeance where DATEECHEANCE > date(?) and DATEECHEANCE < date(?) and contrat_IDCONTRAT = ?");
-			query.setParameter(1, datemax);
-			query.setParameter(2, datemin);
-			query.setParameter(3, contrat.getIDCONTRAT());
+			Query query = getEntityManager().createNativeQuery("select e.* from echeance e where e.contrat_IDCONTRAT = ?");
+			query.setParameter(1, contrat.getIDCONTRAT());
 			tier = query.getResultList();
 			userTxn.commit();			
 		} catch (Throwable e) {
