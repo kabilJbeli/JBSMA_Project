@@ -99,7 +99,7 @@ public class ServiceContrat implements ServiceContratLocal {
     public void CreationContrat (Contrat contrat) throws ParseException {
     	contrat.setEcheances(CalculeMensualite(contrat));
     	contrat.setMTTCOM(round(calculeMontantInterets(contrat.getEcheances())));
-    	contrat.setMTTTC(round(CalculeMontantTotale(contrat.getEcheances())));
+    	contrat.setMTTTC(CalculeMontantTotale(contrat.getEcheances()));
     	contrat.setDATEDEBUT(contrat.getDATEDEBUT().plusMonths(1));
     	daoContrat.creation(contrat);
     }

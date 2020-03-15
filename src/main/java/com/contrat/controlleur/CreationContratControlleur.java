@@ -202,6 +202,8 @@ public class CreationContratControlleur {
 		contrat.setProduit(p);
 		contrat.setDATEFIN(DateFin);
 		contrat.setDUREE(DUREE);
+		String numeroContrat = String.valueOf(p.getIDCONF()) + String.valueOf(T.getIDTIER()) + serviceContrat.getNext();
+		contrat.setNUMEROCONTRAT(numeroContrat);
 		try {
 			serviceContrat.CreationContrat(contrat);
 			FacesContext.getCurrentInstance().addMessage("CreationContrat", new FacesMessage("A new contract entity has been created with  the following number:"+contrat.getNUMEROCONTRAT()));
