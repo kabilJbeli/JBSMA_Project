@@ -110,10 +110,7 @@ public class TierManagement implements TierManagementLocal {
 
 		} catch (Throwable e) {
 			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage("customForm:cin", new FacesMessage("ERROR: The CIN Should be A Unique Value"));
-
-	            
-	         FacesContext.getCurrentInstance();
+			FacesContext.getCurrentInstance().addMessage("customForm:cin", new FacesMessage("ERROR: The CIN Should be A Unique Value"));	            
 			try {
 				userTxn.rollback();
 			} catch (IllegalStateException | SecurityException | SystemException e1) {

@@ -5,9 +5,12 @@ import java.lang.String;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.ejb.EJB;
 import javax.persistence.*;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.tier.dao.TierManagementLocal;
 import com.tier.entities.Tier;
@@ -20,9 +23,18 @@ import com.tier.entities.Tier;
 
 public class Contrat implements Serializable {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int IDCONTRAT;
+  
+	@Id
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(
+		name = "UUID",
+		strategy = "org.hibernate.id.UUIDGenerator"
+	)
+	@Column(name = "NUMEROCONTRAT", updatable = false, nullable = false)
 	private String NUMEROCONTRAT;
 	private String DESCRIPTION;
 	private LocalDate DATEDEBUT;
