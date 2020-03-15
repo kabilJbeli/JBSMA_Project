@@ -7,9 +7,11 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+
 import com.contrat.dao.ConfProduitLocal;
 import com.contrat.dao.ContratManagementLocal;
 import com.contrat.entities.Contrat;
@@ -19,6 +21,7 @@ import com.tier.entities.Tier;
 import com.tier.dao.TierManagement;
 import com.tier.dao.TierManagementLocal;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.ZoneId;
 
 
@@ -56,6 +59,13 @@ public class CreationContratControlleur {
     private Boolean updateFindTier=true;
 	private Integer tierCIN;
 	private String description;
+	private int DUREE;
+	public int getDUREE() {
+		return DUREE;
+	}
+	public void setDUREE(int dUREE) {
+		DUREE = dUREE;
+	}
 	public String getDescription() {
 		return description;
 	}
@@ -180,7 +190,9 @@ public class CreationContratControlleur {
 		Tier T = new Tier();
 		T = daotier.findByCIN(selectedTierId);
 		Produit p = new Produit();
-		p = serviceProduit.rechercheProduit(idProduit);
+		p = serviceProduit.rechercheProduit(idProduit);		
+		Period addedPeriod = Period.ofMonths(DUREE);
+		DateFin = DateEffet.plus(addedPeriod);		    
 		Contrat contrat = new Contrat();
 		contrat.setTierByCin(T);
 		contrat.setDATEDEBUT(DateEffet);
@@ -188,12 +200,16 @@ public class CreationContratControlleur {
 		contrat.setMTFINANCEMENT(Mtfinancement);
 		contrat.setDESCRIPTION(description);
 		contrat.setProduit(p);
-		contrat.setDUREE(20);
+		contrat.setDATEFIN(DateFin);
+		contrat.setDUREE(DUREE);
 		try {
 			serviceContrat.CreationContrat(contrat);
+			FacesContext.getCurrentInstance().addMessage("CreationContrat", new FacesMessage("A new contract entity has been created with  the following number:"+contrat.getNUMEROCONTRAT()));
 
 		}catch(ParseException e) {			
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage("CreationContrat", new FacesMessage("An error occured while creating the contract"));
+
 		}
 	}
 	public String getTierInputValue() {
