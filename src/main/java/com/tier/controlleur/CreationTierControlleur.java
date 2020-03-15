@@ -25,7 +25,7 @@ public class CreationTierControlleur {
 	private TierManagementLocal daotier;
     private Tier tiers = new Tier();
 	private String ADRESSETIER;
-	private Integer CINTIER;
+	private String CINTIER;
 	private String NAMETIER;
 	private String PRENOMTIER;	
 	private Boolean iseditable=false;
@@ -46,11 +46,11 @@ public class CreationTierControlleur {
 		ADRESSETIER = aDRESSETIER;
 	}
 
-	public Integer getCINTIER() {
+	public String getCINTIER() {
 		return CINTIER;
 	}
 
-	public void setCINTIER(Integer cINTIER) {
+	public void setCINTIER(String cINTIER) {
 		CINTIER = cINTIER;
 	}
 

@@ -51,7 +51,7 @@ public class CreationContratControlleur {
     private LocalDate DateFin;
     private Tier tiers =  new Tier();
     private String tierInputValue;
-    private int selectedTierId;
+    private String selectedTierId;
     private String TierName;
     private Boolean updateFindTier=true;
 	private Integer tierCIN;
@@ -70,13 +70,13 @@ public class CreationContratControlleur {
 
 	private Date dateEffetd;
 	private Date dateFind;
-	public int getSelectedTierId() {
+	public String getSelectedTierId() {
 		return selectedTierId;
 	}
 	public Date getDateFind() {
 		return dateFind;
 	}
-	public void setSelectedTierId(int selectedTierId) {
+	public void setSelectedTierId(String selectedTierId) {
 		this.selectedTierId = selectedTierId;
 	}
 	public Boolean getUpdateFindTier() {
@@ -178,18 +178,17 @@ public class CreationContratControlleur {
 	}
 	public void setNouveauxContrat() throws ParseException {
 		Tier T = new Tier();
-		T.setADRESSETIER(daotier.findByCIN(selectedTierId).get(0).getADRESSETIER());
-		T.setCINTIER(daotier.findByCIN(selectedTierId).get(0).getCINTIER());
-		T.setIDTIER(daotier.findByCIN(selectedTierId).get(0).getIDTIER());
-		T.setNAMETIER(daotier.findByCIN(selectedTierId).get(0).getNAMETIER());
-		T.setPRENOMTIER(daotier.findByCIN(selectedTierId).get(0).getPRENOMTIER());		
+		T = daotier.findByCIN(selectedTierId);
+		Produit p = new Produit();
+		p = serviceProduit.rechercheProduit(idProduit);
 		Contrat contrat = new Contrat();
 		contrat.setTierByCin(T);
 		contrat.setDATEDEBUT(DateEffet);
 		contrat.setDATEECHEANCE(DateEcheance);
 		contrat.setMTFINANCEMENT(Mtfinancement);
 		contrat.setDESCRIPTION(description);
-		contrat.setProduit(produit);
+		contrat.setProduit(p);
+		contrat.setDUREE(20);
 		try {
 			serviceContrat.CreationContrat(contrat);
 
@@ -204,7 +203,7 @@ public class CreationContratControlleur {
 		this.tierInputValue =  tierInputValue;
 	}
 	public void updateSeletedTier() {
-	this.tiers = daotier.findByCIN(selectedTierId).get(0);
+	this.tiers = daotier.findByCIN(selectedTierId);
 		
 	}
 	

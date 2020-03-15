@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import com.comptabilite.entities.Encaissement;
 import com.comptabilite.entities.Facture;
@@ -16,7 +19,7 @@ import com.contrat.service.ServiceContratLocal;
 
 @ManagedBean(name = "Facturation")
 @SessionScoped
-@Stateful
+@Stateless
 public class EncaissementFactureController {
 	@EJB
 	ServiceFactureLocal ServiceFacture;
@@ -27,6 +30,10 @@ public class EncaissementFactureController {
 	List<Facture> factures;
 	Facture facture;
 	String numeroContrat;
+	
+	public EncaissementFactureController() {
+		numeroContrat = null;
+	}
 
 	public ServiceFactureLocal getServiceFacture() {
 		return ServiceFacture;

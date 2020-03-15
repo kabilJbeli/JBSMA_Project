@@ -120,13 +120,12 @@ public class TierManagement implements TierManagementLocal {
 	}
 
 	@Override
-	public List<Tier> findByCIN(Integer CIN) {
-		List<Tier> tier = null;
+	public Tier findByCIN(String CIN) {
+		Tier tier = null;
 		UserTransaction userTxn = sessionContext.getUserTransaction();
 		try {
 			userTxn.begin();			
-			Query query = getEntityManager().createNativeQuery("select * from Tier where CINTIER=?").setParameter(1, CIN);
-		tier = query.getResultList();
+			tier = (Tier) getEntityManager().createQuery("SELECT t FROM Tier t where t.CINTIER = :cin").setParameter("cin", CIN).getSingleResult();
 			userTxn.commit();			
 		} catch (Throwable e) {
 			e.printStackTrace();

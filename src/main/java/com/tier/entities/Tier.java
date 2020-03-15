@@ -18,7 +18,7 @@ public class Tier implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer IDTIER;
 	@Column(unique = true)
-	private Integer CINTIER;
+	private String CINTIER;
 	private String NAMETIER;
 	private String PRENOMTIER;
 	private String ADRESSETIER;
@@ -43,11 +43,11 @@ public class Tier implements Serializable {
 	public void setIDTIER(Integer IDTIER) {
 		this.IDTIER = IDTIER;
 	}   
-	public Integer getCINTIER() {
+	public String getCINTIER() {
 		return this.CINTIER;
 	}
 
-	public void setCINTIER(Integer CINTIER) {
+	public void setCINTIER(String CINTIER) {
 		this.CINTIER = CINTIER;
 	}   
 	public String getNAMETIER() {
