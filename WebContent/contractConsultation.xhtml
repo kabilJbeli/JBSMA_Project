@@ -37,7 +37,7 @@
 					<h:form id="consultContract" styleClass="form-horizontal">
 						<div class="form-group">
 							<div class="col-sm-12">
-								<h:dataTable styleClass="table"
+								<h:dataTable styleClass="table" id="contractList" rendered="#{not CreationContrat.showEcheancePanel}"
 									value="#{CreationContrat.allContratList}" var="con">	
 									
 										<h:column styleClass="col">
@@ -70,6 +70,11 @@
 								
 							</div>
 						</div>
+						   <h:commandButton action="#{CreationContrat.setShowEcheancePanel(false)}"  rendered="#{CreationContrat.showEcheancePanel}"
+    		                          styleClass="btn btn-default"
+    		                         value="back" execute="@form" render=":consultContract:echeanceList;:consultContract:contractList" update=":consultContract:echeanceList;:consultContract:contractList" >
+    		                     
+    		                         </h:commandButton>
 						<h:dataTable styleClass="table" id="echeanceList" rendered="#{CreationContrat.showEcheancePanel}"
 									value="#{CreationContrat.getEcheanceListForSelectContract()}" var="con">	
 									
