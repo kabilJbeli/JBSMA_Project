@@ -34,7 +34,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-xs-updated">
-					<h:form id="CreationContrat" styleClass="form-horizontal">
+					<h:form id="consultContract" styleClass="form-horizontal">
 						<div class="form-group">
 							<div class="col-sm-12">
 								<h:dataTable styleClass="table"
@@ -57,19 +57,63 @@
     		<h:outputText value="#{con.DESCRIPTION}"  />
 									 </h:column>
 								
-								
 								 			<h:column styleClass="col">
 										<f:facet name="header">Facture list</f:facet>					
 					
-    		                         <h:commandLink action="CreationContrat.updateSelectedContractId(con)" 
-    		                         href="echeances.xhtml"  styleClass="btn btn-default"
-    		                         value="Echeances" >
-    		                         </h:commandLink>
+    		                         <h:commandButton action="#{CreationContrat.updateSelectedContractId(con)}" 
+    		                          styleClass="btn btn-default"
+    		                         value="Echeances" execute="@form" render=":consultContract:echeanceList" update=":consultContract:echeanceList" >
+    		                     
+    		                         </h:commandButton>
 									 </h:column>
 								</h:dataTable>
+								
 							</div>
 						</div>
+						<h:dataTable styleClass="table" id="echeanceList" rendered="#{CreationContrat.showEcheancePanel}"
+									value="#{CreationContrat.getEcheanceListForSelectContract()}" var="con">	
+									
+										<h:column styleClass="col">
+										<f:facet name="header">ENCAISSEMENT  ID</f:facet>					
+					
+    		<h:outputText value="#{con.IDENCAISSEMENT}"  />
+									 </h:column>
+									 		<h:column styleClass="col">
+										<f:facet name="header">DATE ENCAISSEMENT</f:facet>					
+					
+    		<h:outputText value="#{con.DATEENCAISSEMENT}"  />
+									 </h:column>
+									 
+									 			<h:column styleClass="col">
+										<f:facet name="header">ENCAISSEMENT DESCRIPTION</f:facet>					
+					
+    		<h:outputText value="#{con.DESCRIPTION}"  />
+									 </h:column>
+									 
+									 <h:column styleClass="col">
+										<f:facet name="header">MTCOM</f:facet>					
+					
+    		                          		<h:outputText value="#{con.MTCOM}"  />
+    		                      
+									 </h:column>
+								<h:column styleClass="col">
+										<f:facet name="header">MTTTC</f:facet>					
+					
+    		                          		<h:outputText value="#{con.MTTTC}"  />
+    		                      
+									 </h:column>
+								
+								 			<h:column styleClass="col">
+										<f:facet name="header">STATUS</f:facet>					
+					
+    		                          		<h:outputText value="#{con.STATUS}"  />
+    		                      
+									 </h:column>
+								</h:dataTable>
+						
+
 					</h:form>
+
 				</div>
 			</div>		
 		</div>
