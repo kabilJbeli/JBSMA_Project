@@ -12,6 +12,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import com.comptabilite.dao.EncaissementManagementLocal;
+import com.comptabilite.entities.Encaissement;
 import com.contrat.dao.ConfProduitLocal;
 import com.contrat.dao.ContratManagementLocal;
 import com.contrat.entities.Contrat;
@@ -38,6 +40,8 @@ public class CreationContratControlleur {
 	TierManagementLocal daotier;
 	@EJB
 	ContratManagementLocal daoContrat;
+	@EJB
+	EncaissementManagementLocal daoEncaissement;
 	public List<Tier> searchedTiers;
     private Produit produit;
     private int idProduit;
@@ -80,6 +84,15 @@ public class CreationContratControlleur {
 
 	private Date dateEffetd;
 	private Date dateFind;
+	private boolean showEcheancePanel=false;
+	private List<Encaissement> echeanceListForSelectContract = null;
+	
+	public boolean getShowEcheancePanel() {
+		return showEcheancePanel;
+	}
+	public void setShowEcheancePanel(boolean showEcheancePanel) {
+		this.showEcheancePanel = showEcheancePanel;
+	}
 	public String getSelectedTierId() {
 		return selectedTierId;
 	}
@@ -235,11 +248,21 @@ public class CreationContratControlleur {
 		return daoContrat.contractList();		
 	}
 	public void updateSelectedContractId(Contrat con) {
-		this.updateSelectedContract = con.getIDCONTRAT();		
+		if(con != null) {
+		this.updateSelectedContract = con.getIDCONTRAT();	
+		this.setShowEcheancePanel(true);
+		this.setEcheanceListForSelectContract(this.getEcheanceForSelectedContrat(con));
+		}
 	}
-	
 
 	
-	
-   
+   public List<Encaissement> getEcheanceListForSelectContract() {
+		return echeanceListForSelectContract;
+	}
+	public void setEcheanceListForSelectContract(List<Encaissement> echeanceListForSelectContract) {
+		this.echeanceListForSelectContract = echeanceListForSelectContract;
+	}
+public List<Encaissement>  getEcheanceForSelectedContrat(Contrat con) {
+	  return daoEncaissement.FindbyContract(con);
+   }
 }
