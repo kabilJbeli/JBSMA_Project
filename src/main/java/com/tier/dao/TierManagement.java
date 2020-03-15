@@ -7,6 +7,9 @@ import javax.ejb.LocalBean;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -25,6 +28,7 @@ public class TierManagement implements TierManagementLocal {
 	EntityManager entityManager;
 	@Resource
 	private SessionContext sessionContext;
+    private UIComponent cin;
 
 	/**
 	 * Default constructor.
@@ -102,8 +106,14 @@ public class TierManagement implements TierManagementLocal {
 			userTxn.begin();
 			getEntityManager().persist(T);
 			userTxn.commit();
+			FacesContext.getCurrentInstance().addMessage("customForm", new FacesMessage("A new Tier entity has been created"));
+
 		} catch (Throwable e) {
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage("customForm:cin", new FacesMessage("ERROR: The CIN Should be A Unique Value"));
+
+	            
+	         FacesContext.getCurrentInstance();
 			try {
 				userTxn.rollback();
 			} catch (IllegalStateException | SecurityException | SystemException e1) {
