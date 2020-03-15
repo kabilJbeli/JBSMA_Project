@@ -71,16 +71,20 @@
 							<h:message for="selectItems" style="color:red" />
 						</div>
 					</div>
+					
+					
+					
+					
 					<div class="form-group">
 						<h:outputLabel value="Date d'effet"
 							styleClass="text-left col-sm-2" />
 							
 							
 						<div class="col-sm-10">
-						<h:inputText required="true" id="dateEffet" value="#{CreationContrat.dateEffet}"
+						<h:inputText required="true" id="dateEffet" value="#{CreationContrat.dateEffetd}"
 								styleClass="form-control" >
-								<f:validateRequired />	
-								<f:convertDateTime type="date" dateStyle="default" pattern="yyyy-mm-dd"/>
+								<f:validateRequired />								
+								<f:convertDateTime type="date" dateStyle="short" pattern="yyyy-mm-dd"/>
 								</h:inputText>
 								<h:message for="dateEffet" style="color:red" />	
 						</div>
@@ -89,10 +93,10 @@
 						<h:outputLabel value="Date Fin"
 							styleClass="text-left  col-sm-2" />
 						<div class="col-sm-10">
-							<h:inputText required="true" id="dateFin" value="#{CreationContrat.dateFin}"
+							<h:inputText required="true" id="dateFin" value="#{CreationContrat.dateFind}"
 								styleClass="form-control" >
 								<f:validateRequired />	
-								<f:convertDateTime type="date"  pattern="year-Month-day" />
+								<f:convertDateTime type="date" dateStyle="short"  pattern="yyyy-mm-dd"  />
 								</h:inputText>
 								<h:message for="dateFin" style="color:red" />	
 					
@@ -108,6 +112,17 @@
 							<f:validateRequired />		
 								</h:inputText>
 								<h:message for="mtFin" style="color:red" />
+						</div>
+					</div>
+					
+						<div class="form-group">
+						<h:outputLabel value="Description" 
+							styleClass="text-left  col-sm-2" />
+						<div class="col-sm-10">
+							<h:inputTextarea id="description" style="width:100%; min-width:100%;max-width:100%;" cols="30" rows="10" value="#{CreationContrat.description}" >
+							<f:validateRequired />
+							</h:inputTextarea>
+							<h:message for="description" style="color:red" />
 						</div>
 					</div>
 					

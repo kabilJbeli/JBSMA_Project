@@ -17,6 +17,7 @@ public class Tier implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer IDTIER;
+	@Column(unique = true)
 	private Integer CINTIER;
 	private String NAMETIER;
 	private String PRENOMTIER;

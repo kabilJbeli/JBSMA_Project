@@ -2,6 +2,7 @@ package com.contrat.controlleur;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -9,9 +10,6 @@ import javax.ejb.Stateless;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.component.UIInput;
-
-import com.comptabilite.controller.EncaissementFactureController;
 import com.contrat.dao.ConfProduitLocal;
 import com.contrat.dao.ContratManagementLocal;
 import com.contrat.entities.Contrat;
@@ -20,6 +18,8 @@ import com.contrat.service.ServiceContratLocal;
 import com.tier.entities.Tier;
 import com.tier.dao.TierManagement;
 import com.tier.dao.TierManagementLocal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 
  
@@ -55,9 +55,26 @@ public class CreationContratControlleur {
     private String TierName;
     private Boolean updateFindTier=true;
 	private Integer tierCIN;
-	private int updateSelectedContract;    
+	private String description;
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	private int updateSelectedContract;   
+	public Date getDateEffetd() {
+		return dateEffetd;
+	}
+
+	private Date dateEffetd;
+	private Date dateFind;
 	public int getSelectedTierId() {
 		return selectedTierId;
+	}
+	public Date getDateFind() {
+		return dateFind;
 	}
 	public void setSelectedTierId(int selectedTierId) {
 		this.selectedTierId = selectedTierId;
@@ -139,8 +156,10 @@ public class CreationContratControlleur {
 	public LocalDate getDateEffet() {
 		return DateEffet;
 	}
-	public void setDateEffet(LocalDate dateEffet) {
-		DateEffet = dateEffet;
+	public void setDateEffetd(Date dateEffetd) {
+		this.dateEffetd =dateEffetd;
+		LocalDateTime localDateTime = dateEffetd.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		this.DateEffet = localDateTime.toLocalDate();
 	}
 	public LocalDate getDateEcheance() {
 		return DateEcheance;
@@ -151,16 +170,25 @@ public class CreationContratControlleur {
 	public LocalDate getDateFin() {
 		return DateFin;
 	}
-	public void setDateFin(LocalDate dateFin) {
-		this.DateFin = dateFin;
+	public void setDateFind(Date dateFind) {
+		this.dateFind =dateFind;
+		LocalDateTime localDateTime = dateFind.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		this.DateFin = localDateTime.toLocalDate();
+		
 	}
 	public void setNouveauxContrat() throws ParseException {
+		Tier T = new Tier();
+		T.setADRESSETIER(daotier.findByCIN(selectedTierId).get(0).getADRESSETIER());
+		T.setCINTIER(daotier.findByCIN(selectedTierId).get(0).getCINTIER());
+		T.setIDTIER(daotier.findByCIN(selectedTierId).get(0).getIDTIER());
+		T.setNAMETIER(daotier.findByCIN(selectedTierId).get(0).getNAMETIER());
+		T.setPRENOMTIER(daotier.findByCIN(selectedTierId).get(0).getPRENOMTIER());		
 		Contrat contrat = new Contrat();
-		contrat.setTier((Tier)daotier.findByCIN(selectedTierId));
+		contrat.setTierByCin(T);
 		contrat.setDATEDEBUT(DateEffet);
-		contrat.setDATEFIN(DateFin);
 		contrat.setDATEECHEANCE(DateEcheance);
 		contrat.setMTFINANCEMENT(Mtfinancement);
+		contrat.setDESCRIPTION(description);
 		contrat.setProduit(produit);
 		try {
 			serviceContrat.CreationContrat(contrat);
@@ -176,7 +204,7 @@ public class CreationContratControlleur {
 		this.tierInputValue =  tierInputValue;
 	}
 	public void updateSeletedTier() {
-	this.tiers = (Tier) daotier.findByCIN(selectedTierId);
+	this.tiers = daotier.findByCIN(selectedTierId).get(0);
 		
 	}
 	
@@ -193,19 +221,7 @@ public class CreationContratControlleur {
 		this.updateSelectedContract = con.getIDCONTRAT();		
 	}
 	
-	public void getListTiersByName() {
-		if(!TierName.isEmpty()) {
-	this.updateFindTier = false;
-	this.setsearchedTiers(daotier.findByName(String.valueOf(TierName)));
-		}
-	}
-	
-	public void getListTiersByCIN() {
-		if(tierCIN != null) {
-			this.updateFindTier = false;
-	this.setsearchedTiers(daotier.findByCIN(tierCIN));
-		}
-	}
+
 	
 	
    
