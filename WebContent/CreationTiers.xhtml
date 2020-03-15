@@ -53,6 +53,7 @@ padding:0px !important;
 		</div>
 	<div class="container">	
 	<h:form id="customForm">
+	<h:message for="customForm" style="color:green; padding: 15px !important; display: block; float: left;" />	
 			<div class="form-group">
 						<h:outputLabel value="Name"
 							styleClass="text-left col-sm-2" ></h:outputLabel>
@@ -90,7 +91,7 @@ padding:0px !important;
 						    <f:validateRequired />
 						
 						</h:inputText>
-												            <h:message for="cin" style="color:red" />
+						<h:message for="cin" style="color:red" />
 						
 						</div>
 						</div>
@@ -116,7 +117,9 @@ padding:0px !important;
 							</h:commandButton>
 						</div> 
 					</div>
+					
 						</h:form>
+						
 </div>
 </body>
 </html>
