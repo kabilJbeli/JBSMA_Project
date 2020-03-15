@@ -52,7 +52,7 @@
 						value="#{Facturation.numeroContrat}" styleClass="form-control" />
 					<h:commandButton value="Recherche facture"
 						action="#{Facturation.getListFactureByContrat()}"
-						styleClass="btn btn-danger">
+						styleClass="btn btn-danger" style="margin:15px 0px;">
 						<f:ajax execute="@form" render="lesfactures" update="lesfactures" />
 					</h:commandButton>
 				</div>
