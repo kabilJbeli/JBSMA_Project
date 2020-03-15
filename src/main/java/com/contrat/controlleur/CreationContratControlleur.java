@@ -37,18 +37,29 @@ public class CreationContratControlleur {
 	ContratManagementLocal daoContrat;
 	public List<Tier> searchedTiers;
     private Produit produit;
-    private double Mtfinancement;
+    private int idProduit;
+    public int getIdProduit() {
+		return idProduit;
+	}
+	public void setIdProduit(int idProduit) {
+		this.idProduit = idProduit;
+	}
+
+	private double Mtfinancement;
     private LocalDate DateEffet;
     private LocalDate DateEcheance;
     private LocalDate DateFin;
     private Tier tiers =  new Tier();
     private String tierInputValue;
-    private Tier selectedTierId;
-    private EncaissementFactureController Facture = new EncaissementFactureController();
-	public Tier getSelectedTierId() {
+    private int selectedTierId;
+    private String TierName;
+    private Boolean updateFindTier=true;
+	private Integer tierCIN;
+	private int updateSelectedContract;    
+	public int getSelectedTierId() {
 		return selectedTierId;
 	}
-	public void setSelectedTierId(Tier selectedTierId) {
+	public void setSelectedTierId(int selectedTierId) {
 		this.selectedTierId = selectedTierId;
 	}
 	public Boolean getUpdateFindTier() {
@@ -57,22 +68,19 @@ public class CreationContratControlleur {
 	public void setUpdateFindTier(Boolean updateFindTier) {
 		this.updateFindTier = updateFindTier;
 	}
-	private String tierName;
-    private Boolean updateFindTier=true;
+	
     public Integer getTierCIN() {
 		return tierCIN;
 	}
 	public void setTierCIN(Integer tierCIN) {
 		this.tierCIN = tierCIN;
 	}
-	private Integer tierCIN;
-    
 
 	public String getTierName() {
-		return tierName;
+		return TierName;
 	}
 	public void setTierName(String tierName) {
-		this.tierName = tierName;
+		this.TierName = tierName;
 	}
 	public ConfProduitLocal getDaoproduit() {
 		return serviceProduit;
@@ -108,20 +116,7 @@ public class CreationContratControlleur {
 		return serviceProduit.rechercheProduits();
 	}
 	
-	public void getListTiersByName() {
-		if(!tierName.isEmpty()) {
-	this.updateFindTier = false;
-	this.setsearchedTiers(daotier.findByName(String.valueOf(tierName)));
-		}
-	}
-	
-	public void getListTiersByCIN() {
-		if(tierCIN != null) {
-			this.updateFindTier = false;
-	this.setsearchedTiers(daotier.findByCIN(tierCIN));
-		}
-	}
-	
+
 	public List<Tier> getsearchedTiers(){
 		return searchedTiers;
 	}
@@ -161,7 +156,7 @@ public class CreationContratControlleur {
 	}
 	public void setNouveauxContrat() throws ParseException {
 		Contrat contrat = new Contrat();
-		contrat.setTier(selectedTierId);
+		contrat.setTier((Tier)daotier.findByCIN(selectedTierId));
 		contrat.setDATEDEBUT(DateEffet);
 		contrat.setDATEFIN(DateFin);
 		contrat.setDATEECHEANCE(DateEcheance);
@@ -181,17 +176,37 @@ public class CreationContratControlleur {
 		this.tierInputValue =  tierInputValue;
 	}
 	public void updateSeletedTier() {
-		if(selectedTierId != null) {
-	this.tiers = (Tier) daotier.findByCIN(selectedTierId.getCINTIER());
-		}		
+	this.tiers = (Tier) daotier.findByCIN(selectedTierId);
+		
 	}
 	
+	public int getUpdateSelectedContract() {
+		return updateSelectedContract;
+	}
+	public void setUpdateSelectedContract(int updateSelectedContract) {
+		this.updateSelectedContract = updateSelectedContract;
+	}
 	public List<Contrat> getAllContratList() {
 		return daoContrat.contractList();		
 	}
-	public void updateFactureContractNumber(Contrat con) {
-		Facture.setNumeroContrat(con.getNUMEROCONTRAT());		
+	public void updateSelectedContractId(Contrat con) {
+		this.updateSelectedContract = con.getIDCONTRAT();		
 	}
+	
+	public void getListTiersByName() {
+		if(!TierName.isEmpty()) {
+	this.updateFindTier = false;
+	this.setsearchedTiers(daotier.findByName(String.valueOf(TierName)));
+		}
+	}
+	
+	public void getListTiersByCIN() {
+		if(tierCIN != null) {
+			this.updateFindTier = false;
+	this.setsearchedTiers(daotier.findByCIN(tierCIN));
+		}
+	}
+	
 	
    
 }

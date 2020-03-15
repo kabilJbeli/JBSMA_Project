@@ -19,11 +19,15 @@
 	<div class="col-md-6">
 		<span style="padding-left:15px">Search by Name</span>
 	
-	<div class="col-md-11"><h:inputText id="tierInputValue" value="#{CreationContrat.tierName}" styleClass="form-control" /></div>
-	<div class="col-md-1" style="padding:0px;"><h:commandButton 
+	<div class="col-md-11">
+	<h:inputText id="tierInputValue" value="#{CreationContrat.tierName}" styleClass="form-control" />
+	</div>
+	<div class="col-md-1" style="padding:0px;">
+	<h:commandButton 
     value="Submit" action="#{CreationContrat.getListTiersByName()}" styleClass="btn btn-danger" >
     <f:ajax execute="@form" render="selectTier"  update="selectTier" />
-    </h:commandButton>	</div>
+    </h:commandButton>	
+    </div>
     
 	</div>
 	
