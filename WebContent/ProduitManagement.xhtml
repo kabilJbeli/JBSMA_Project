@@ -34,8 +34,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-xs-updated">
-					<h:form id="CreationContrat" styleClass="form-horizontal">
-					<h:message for="ConfigurationProduit" style="color: red;   margin: 15px 0px;  display: block; font-weight: bold;" />	
+					<h:form id="productManagement" styleClass="form-horizontal">
+					<h:message for="productManagement" style="color:red; margin:15px 0px; display:block;"/>
 						<div class="form-group">
 							<div class="col-sm-12">
 								<h:dataTable styleClass="table"
@@ -68,7 +68,7 @@
 										<h:commandButton value="Modifier"
 											styleClass="btn btn-default"
 											actionListener="#{ConfigurationProduit.setProductEditable(prod)}" 
-											process="@this" update=":Modifierproduit" rendered="#{not prod.iseditable}" />
+											process="@this" update=":Modifierproduit" render="" rendered="#{not prod.iseditable}" />
 										<h:commandButton value="Update"
 											styleClass="btn btn-default"
 											actionListener="#{ConfigurationProduit.modifierProduit(prod)}" 

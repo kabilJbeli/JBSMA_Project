@@ -126,12 +126,7 @@ public void createProduct() {
 	}
 	
 	public void delete(Produit produit) {
-		if (serviceProduit.ProduitRatacheContrat(produit)) {
-			serviceProduit.Delete(produit);
-		}
-		else {
-			FacesContext.getCurrentInstance().addMessage("ConfigurationProduit", new FacesMessage("This product is attached to a contract is should not be deleted"));
-		}
+			serviceProduit.Delete(produit);	
 	}
 
 }
