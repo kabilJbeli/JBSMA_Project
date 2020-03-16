@@ -65,7 +65,6 @@ public class ServiceContrat implements ServiceContratLocal {
     @Override
     public double round(double montant) {
     	DecimalFormat df = new DecimalFormat () ;
-    	df.setMaximumIntegerDigits(3);
     	df.setMinimumIntegerDigits(3);
     	df.setDecimalSeparatorAlwaysShown (true);
     	NumberFormat parsedouble = NumberFormat.getInstance();
@@ -99,7 +98,7 @@ public class ServiceContrat implements ServiceContratLocal {
     public void CreationContrat (Contrat contrat) throws ParseException {
     	contrat.setEcheances(CalculeMensualite(contrat));
     	contrat.setMTTCOM(round(calculeMontantInterets(contrat.getEcheances())));
-    	contrat.setMTTTC(CalculeMontantTotale(contrat.getEcheances()));
+    	contrat.setMTTTC(round(CalculeMontantTotale(contrat.getEcheances())));
     	contrat.setDATEDEBUT(contrat.getDATEDEBUT().plusMonths(1));
     	daoContrat.creation(contrat);
     }

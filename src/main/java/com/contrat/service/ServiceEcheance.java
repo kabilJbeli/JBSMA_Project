@@ -27,4 +27,12 @@ public class ServiceEcheance implements ServiceEcheanceLocal {
 		
 	}
 
+	@Override
+	public Echeance RechercheEcheance(int idEch) {
+		// TODO Auto-generated method stub
+		return daoEchance.RechercheEcheance(idEch);
+	}
+	
+	
+
 }

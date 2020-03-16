@@ -266,7 +266,9 @@ public class CreationContratControlleur {
 	public void setEcheanceListForSelectContract(List<Echeance> echeanceListForSelectContract) {
 		this.echeanceListForSelectContract = echeanceListForSelectContract;
 	}
-	public void createFacture(Echeance E) {
+	
+	public void createFacture(int idech) {
+		Echeance E = daoEcheance.RechercheEcheance(idech);
 		Facture facture = new Facture();
 		facture.setDATEEFFET(E.getDATEECHEANCE());
 		facture.setECHEANCE(E);

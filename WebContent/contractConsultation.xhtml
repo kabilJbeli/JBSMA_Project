@@ -123,8 +123,7 @@
 							<h:column styleClass="col">
 								<f:facet name="header" style="text-align:center;">Status</f:facet>
 									<h:panelGroup rendered="#{con[5] == 0}">
-									<h:commandButton 
-											action="#{CreationContrat.createFacture(con)}"
+									<h:commandButton action="#{CreationContrat.createFacture(con[0])}"
 											styleClass="btn btn-danger" value="Generate Facture"
 										excute="@this"	/>
 								</h:panelGroup>

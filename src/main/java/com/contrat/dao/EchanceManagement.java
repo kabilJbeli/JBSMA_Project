@@ -54,6 +54,27 @@ public class EchanceManagement implements EchanceManagementLocal {
 	}
 	
 	@Override
+	public Echeance RechercheEcheance(int idEch) {
+		UserTransaction userTxn = sessionContext.getUserTransaction();
+		try {
+			userTxn.begin();			
+			Echeance ech = getEntityManager().find(Echeance.class, idEch);
+			userTxn.commit();
+			return ech;
+		} catch (Throwable e) {
+			e.printStackTrace();
+			try {
+				userTxn.rollback();
+			} catch (IllegalStateException | SecurityException | SystemException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	
+	
+	@Override
 	public List<Echeance> RechercheEcheanceparDateContrat(Contrat contrat) {
 		List<Echeance> tier = null;
 		UserTransaction userTxn = sessionContext.getUserTransaction();
