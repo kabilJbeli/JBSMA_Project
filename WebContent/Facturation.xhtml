@@ -71,7 +71,7 @@
 						</h:column>
 							<h:column styleClass="col">
 								<f:facet name="header">Montant d'intérêt</f:facet>		
-									      #{fact.MTTTC}
+									      #{fact.MTCOM}
 						</h:column>
 							<h:column styleClass="col">
 								<f:facet name="header">Status</f:facet>
@@ -90,7 +90,7 @@
 								<h:panelGroup rendered="#{fact.status == 0}">
 									<h:commandButton value="Encaissement"
 										styleClass="btn btn-default"
-										actionListener="#{Facturation.encaisseFacture(facture)}"
+										actionListener="#{Facturation.encaisseFacture(fact)}"
 										process="@this" />
 								</h:panelGroup>
 							</h:column>
