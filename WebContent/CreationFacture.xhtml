@@ -46,56 +46,49 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<h:form>
+			<h:form id="EcheanceForm">
 				<div class="col-xs-12 col-xs-updated">
 					<h:inputText id="tierInputValue"
-						value="#{Facturation.numeroContrat}" styleClass="form-control" >
+						value="#{FactureBean.numeroContrat}" styleClass="form-control" required="true">
 							    <f:validateRequired />
 						</h:inputText>
-					<h:commandButton value="Recherche facture"
-						action="#{Facturation.getListFactureByContrat()}"
+					<h:commandButton value="Recherche Echeance"
+						action="#{FactureBean.findEcheances()}"
 						styleClass="btn btn-danger" style="margin:15px 0px;">
-						<f:ajax execute="@form" render="lesfactures" update="lesfactures" />
+						<f:ajax execute="@form" render=":EcheanceForm:Echeances" update=":EcheanceForm:Echeances" />
 					</h:commandButton>
 				</div>
 				<f:attribute name="data-dismiss" value="modal" />
 				<div class="form-group">
 					<div class="col-sm-12">
-						<h:dataTable id="lesfactures" styleClass="table"
-							value="#{Facturation.factures}" var="fact">
+						<h:dataTable id="Echeances" styleClass="table"
+							value="#{FactureBean.echeanceLists}" var="fact">
 							<h:column styleClass="col">
-								<f:facet name="header">Description</f:facet>		
-									      #{fact.DESCRIPTION}
+								<f:facet name="header">ID echeance</f:facet>		
+									      #{fact[0]}
 						</h:column>
 							<h:column styleClass="col">
 								<f:facet name="header">Montant totale</f:facet>		
-									      #{fact.MTTTC}
+									      #{fact[4]}
 						</h:column>
 							<h:column styleClass="col">
 								<f:facet name="header">Montant d'intérêt</f:facet>		
-									      #{fact.MTCOM}
+									      #{fact[5]}
 						</h:column>
 							<h:column styleClass="col">
 								<f:facet name="header">Status</f:facet>
-								<h:panelGroup rendered="#{fact.status == 0}">
-								<h:outputLabel value="impayé" />
-								</h:panelGroup>
-								<h:panelGroup rendered="#{fact.status == 1}">
-								Encaissé
-								</h:panelGroup>
-								<h:panelGroup rendered="#{fact.status == 2}">
-								Annulé
-								</h:panelGroup>
-							</h:column>
-							<h:column styleClass="col">
-								<f:facet name="header">Operation</f:facet>
-								<h:panelGroup rendered="#{fact.status == 0}">
-									<h:commandButton value="Encaissement"
+								<h:panelGroup rendered="#{fact[5] == 0}">
+								<h:commandButton value="Create Facture"
 										styleClass="btn btn-default"
-										actionListener="#{Facturation.encaisseFacture(fact)}"
+										actionListener="#{FactureBean.createFacture(fact[3])}"
 										process="@this" />
+								</h:panelGroup>						
+								<h:panelGroup rendered="#{fact[5] == 1}">
+								Facture Generated
 								</h:panelGroup>
+						
 							</h:column>
+					
 						</h:dataTable>
 					</div>
 				</div>
